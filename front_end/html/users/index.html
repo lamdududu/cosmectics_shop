@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiaoMiao</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/users/user_index.css" rel="stylesheet">
+    <link href="../../css/users/homepage.css" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1>Làm đẹp là đang yêu bản thân</h1>
+                    <p class="my-4">Kiên trì chăm sóc da và thực hiện chế độ sống lành mạnh mỗi ngày là bí quyết để giữ gìn vẻ đẹp thanh xuân cho các nàng</p>
+                    <button class="btn btn-primary rounded-pill px-4 py-2 me-2">Khám phá ngay</button>
+                    <button class="btn btn-outline-secondary rounded-pill px-4 py-2">Tư vấn miễn phí</button>
+                </div>
+                <div class="col-lg-6 hero-img">
+                    <img src="../../images/banner_women.png" alt="Cosmetics hero image" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="section-title text-center mx-auto">Danh mục sản phẩm</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="category-item">
+                        <div class="category-icon cat-skincare">
+                            <i class="bi bi-droplet"></i>
+                        </div>
+                        <h5>Chăm sóc da</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="category-item">
+                        <div class="category-icon cat-makeup">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h5>Trang điểm</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="category-item">
+                        <div class="category-icon cat-haircare">
+                            <i class="bi bi-brush"></i>
+                        </div>
+                        <h5>Chăm sóc tóc</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="category-item">
+                        <div class="category-icon cat-fragrance">
+                            <i class="bi bi-wind"></i>
+                        </div>
+                        <h5>Nước hoa</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Sản phẩm bán chạy</h2>
+            <div id="bestSellers"class="row g-4">
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="banner" style="background-color: var(--peach);">
+                        <div class="banner-content">
+                            <h3>Bộ sưu tập mới</h3>
+                            <p>Khám phá các sản phẩm từ thương hiệu Sulwhasoo</p>
+                            <button class="btn btn-sm btn-primary rounded-pill">Khám phá</button>
+                        </div>
+                        <img src="/api/placeholder/600/200" alt="New collection" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="banner" style="background-color: var(--lavender);">
+                        <div class="banner-content">
+                            <h3>Ưu đãi đặc biệt</h3>
+                            <p>Giảm đến 30% cho các sản phẩm trang điểm</p>
+                            <button class="btn btn-sm btn-primary rounded-pill">Xem ngay</button>
+                        </div>
+                        <img src="/api/placeholder/600/200" alt="Special offers" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Sản phẩm mới</h2>
+            <div id="newProducts" class="row g-4">
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials & Featured Brands Section -->
+    <!-- <section class="py-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title">Khách hàng nói gì</h2>
+                    <div class="card border-0 shadow-sm p-4 mt-4">
+                        <div class="d-flex mb-3">
+                            <img src="/api/placeholder/50/50" alt="Customer" class="rounded-circle">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Nguyễn Thị Hương</h5>
+                                <div>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"Tôi đã sử dụng serum Vitamin C từ BeautyNest trong 2 tháng qua và làn da của tôi đã cải thiện rõ rệt. Các vết thâm mờ dần và da sáng hơn. Chắc chắn sẽ tiếp tục sử dụng!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h2 class="section-title">Thương hiệu nổi bật</h2>
+                    <div class="row g-4 mt-3 align-items-center">
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                        <div class="col-4 col-md-4 text-center">
+                            <img src="/api/placeholder/120/60" alt="Brand logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Footer Section -->
+    <footer id="footer">
+        
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/users/user_index.js"></script>
+    <script src="../../js/users/homepage.js"></script>
+    <script src="../../js/login.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/register.js"></script>
+    <script src="../../js/external_address_api.js"></script>
+
+</body>
+</html>

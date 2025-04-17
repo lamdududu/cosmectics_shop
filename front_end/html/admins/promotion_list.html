@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/admins/admin_index.css">
+    <link rel="stylesheet" href="../../css/admins/product_list.css">
+    <!-- <link rel="stylesheet" href="../../css/admins/batch_list.css"> -->
+</head>
+<body>
+    <div id="sidebar">
+
+    </div>
+    <main class="main-content">
+        
+        <nav id="navbar">
+
+        </nav>
+        <h2 class="page-title">Danh sách khuyến mãi</h2>
+        
+        <!-- Products Table -->
+        <div class="table-wrapper">
+            <div class="table-controls">
+                <div class="table-filter-wrapper">
+                    <div class="input-group" style="width: 300px;">
+                        <input id="productSearching" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Lọc
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                            <li><a class="dropdown-item" href="#">Tất cả</a></li>
+                            <li><a class="dropdown-item" href="#">Còn hàng</a></li>
+                            <li><a class="dropdown-item" href="#">Sắp hết hàng</a></li>
+                            <li><a class="dropdown-item" href="#">Hết hàng</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sắp xếp
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                            <li><a class="dropdown-item" href="#">Cũ nhất</a></li>
+                            <li><a class="dropdown-item" href="#">Tên: A-Z</a></li>
+                            <li><a class="dropdown-item" href="#">Tên: Z-A</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <button type="button" onclick="navigateToPromotionDetail()" class="btn btn-primary">
+                        <i class="bi bi-plus"> Khuyến mãi mới</i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th>Tên chương trình khuyến mãi</th>
+                            <th class="text-center">Ngày bắt đầu</th>
+                            <th class="text-center">Ngày kết thúc</th>
+                            <th class="text-center">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="promotionContainer">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <div id="productCounter" class="selected-info">
+                    
+                </div>
+                <div class="bulk-actions">
+                    <nav aria-label="Product pagination">
+                        <ul id="pagination" class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                        </ul>   
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/discounts/promotion_list.js"></script>
+</body>
+</html>

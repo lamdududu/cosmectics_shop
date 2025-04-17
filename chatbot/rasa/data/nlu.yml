@@ -1,0 +1,63 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - xin chào
+    - chào bạn
+    - xin chào bot
+    - hello
+    - hi
+    - chào buổi sáng
+    - chào buổi chiều
+    - chào buổi tối
+
+- intent: goodbye
+  examples: |
+    - tạm biệt
+    - bye
+    - gặp lại sau
+    - hẹn gặp lại
+    - chào tạm biệt
+    - tôi phải đi đây
+
+- intent: affirm
+  examples: |
+    - đúng
+    - vâng
+    - đúng vậy
+    - chính xác
+    - tôi đồng ý
+    - được
+    - ok
+    - ừ
+
+- intent: deny
+  examples: |
+    - không
+    - không phải vậy
+    - chưa đúng
+    - tôi không đồng ý
+    - sai rồi
+    - không chính xác
+
+- intent: thank
+  examples: |
+    - cảm ơn
+    - cảm ơn bạn
+    - cảm ơn nhiều
+    - rất cảm ơn
+    - thank you
+    - thanks
+
+- intent: out_of_scope
+  examples: |
+    - tôi đói
+    - thời tiết hôm nay thế nào
+    - mấy giờ rồi
+    - bạn bao nhiêu tuổi
+    - hát một bài cho tôi nghe
+    - kể chuyện cười
+
+- intent: find_product
+  examples: |
+    - bạn có nước hoa hồng không?

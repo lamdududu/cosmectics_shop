@@ -1,0 +1,361 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: var(--light-mint);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-brand {
+    color: var(--dark-mint);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-item {
+    margin-bottom: 5px;
+}
+
+.nav-link {
+    color: var(--text-dark);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background-color: var(--light-mint);
+    color: var(--dark-mint);
+}
+
+.nav-link.active {
+    background-color: var(--mint);
+    color: white;
+}
+
+.nav-link i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.navbar-toggler {
+    padding: 8px;
+    border: none;
+    background-color: var(--light-mint);
+    border-radius: 5px;
+}
+
+.user-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.user-dropdown .dropdown-menu {
+    right: 0;
+    left: auto;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.page-title {
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Cards */
+.dashboard-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    border-left: 4px solid;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-sales {
+    border-left-color: #4caf50;
+}
+
+.card-orders {
+    border-left-color: #2196f3;
+}
+
+.card-users {
+    border-left-color: #9c27b0;
+}
+
+.card-products {
+    border-left-color: #ff9800;
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 24px;
+    color: white;
+}
+
+.icon-sales {
+    background-color: #4caf50;
+}
+
+.icon-orders {
+    background-color: #2196f3;
+}
+
+.icon-users {
+    background-color: #9c27b0;
+}
+
+.icon-products {
+    background-color: #ff9800;
+}
+
+.card-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px 0 5px;
+}
+
+.card-label {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Tables */
+.table-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--text-dark);
+    border-bottom-width: 1px;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-status {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-completed {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+.status-pending {
+    background-color: #fff8e1;
+    color: #ff9800;
+}
+
+.status-processing {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+.status-cancelled {
+    background-color: #ffebee;
+    color: #f44336;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
+    .main-content {
+        margin-left: 0;
+    }
+    .main-content.active {
+        margin-left: 250px;
+    }
+}
+
+/* Toggle Button */
+#sidebarCollapse {
+    background-color: var(--light-mint);
+    border: none;
+    color: var(--dark-mint);
+}
+
+/* Badges */
+.badge-counter {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Charts */
+.chart-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Profile */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: var(--light-mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-mint);
+    font-weight: 600;
+}
+
+/* Form Styles */
+.form-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.form-control:focus {
+    border-color: var(--mint);
+    box-shadow: 0 0 0 0.2rem rgba(163, 228, 215, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.btn-primary {
+    background-color: var(--dark-mint);
+    border-color: var(--dark-mint);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--mint);
+    border-color: var(--mint);
+}
+
+.btn-outline-secondary {
+    color: var(--text-dark);
+    border-color: var(--border-color);
+}
+
+.breadcrumb-item a {
+    color: var(--dark-mint);
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-muted);
+}
+
+textarea.form-control {
+    min-height: 400px;
+}
+
+.product-status {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-instock {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+.status-lowstock {
+    background-color: #fff8e1;
+    color: #ff9800;
+}
+
+.status-outofstock {
+    background-color: #ffebee;
+    color: #f44336;
+}
+
+.status-draft {
+    background-color: var(--lavender);
+    color: #9c27b0;
+}
+
+
+.btn {
+    --bs-btn-disabled-bg: None;
+    --bs-btn-disabled-border-color: None;
+}

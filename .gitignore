@@ -1,0 +1,17 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment variables files
+.env
+
+pyvenv.cfg
+
+
+# Media and system folder
+
+Include/
+Lib/
+Scripts/
+media/
+image/

@@ -1,0 +1,35 @@
+version: "3.1"
+nlu:
+
+- intent: search_product
+  examples: |
+    - tôi muốn tìm [nước hoa hồng](category)
+    - tìm cho tôi [kem dưỡng ẩm](category)
+    - tôi đang tìm [nước tẩy trang](category)
+    - có [serum](category) nào không
+    - tôi muốn mua [tẩy trang loreal](product_name)
+    - tìm [sửa rửa mặt](category) [Loreal](brand)
+    - [Nước hoa hồng](brand) [Dear Klairs](product_name)
+    - [Serum](category) giá [dưới 500 ngàn](price_range)
+    - tìm [kem chống nắng](category) [từ 200 đến 500 nghìn](price_range)
+    - có [serum](category) [The Ordinary](brand) không
+    - tôi đang cần một cây [son] (category)
+    - tìm kiếm [kem nền](category)
+    - [Xịt khử mùi](category) [Nivea](brand)
+
+- intent: provide_product_info
+  examples: |
+    - tôi muốn mua [serum](category)
+    - tôi đang tìm [kem dưỡng ẩm Emmie by Happy Skin](product_name)
+    - tôi thích [La Roche Posay](brand)
+    - giá khoảng [100 ngàn](price_range)
+    - tôi muốn [mặt nạ](category) dưỡng ẩm (tag)
+    - tôi cần [serum](category) cho [da mụn](tag)
+    - thương hiệu [Loreal](brand)
+    - [dưới 500 ngàn](price_range)
+    - [trên 300 nghìn](price_range)
+    - tôi quan tâm đến sản phẩm dành cho [da dầu](tag)
+    - tôi thích các sản phẩm [chống oxy hóa](tag)
+    - có sản phẩm dành cho [da khô](tag) không
+    - có (kem chống nắng)[category] dành cho [da mụn](tag) không
+    - tôi đang tìm sản phẩm [phục hồi](tag) da

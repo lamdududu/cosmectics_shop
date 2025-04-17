@@ -1,0 +1,30 @@
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner-content {
+        max-width: 80%;
+        padding: 20px;
+    }
+    
+    .hero {
+        padding: 40px 0;
+    }
+}
+
+.hero {
+    background-color: var(--light-mint);
+    padding: 60px 0;
+}
+
+.hero h1 {
+    font-weight: 700;
+    color: #2e4053;
+}
+
+.hero p {
+    color: #5d6d7e;
+}
+
+.hero img {
+    max-width: 600px;
+    max-height: 400px;
+}

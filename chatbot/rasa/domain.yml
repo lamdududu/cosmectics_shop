@@ -1,0 +1,158 @@
+version: "3.1"
+
+intents:
+- find_product
+- search_product  # Add this if you're using it in stories
+- greet
+- goodbye
+- thank
+- out_of_scope
+- session_start
+- provide_product_info
+
+entities:
+- product_name
+- product_category
+- category
+- price_range  # Add this
+- brand
+- tag
+- product
+
+slots:
+  # Original slots
+  categories_mapping:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  brands_mapping:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  tags_mapping:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  products_mapping:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  entities_cached:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: custom
+  
+  # Missing slots
+  categories:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  brands:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  tags:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  products:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  available_products:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: custom
+  
+  product_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: product_name
+  
+  product_category:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: product_category
+  
+  price_range:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: price_range
+  
+  brand:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: brand
+  
+  category:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: category
+  
+  tag:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: tag
+
+responses:
+  utter_greet:
+    - text: "Xin chào! Tôi có thể giúp gì cho bạn hôm nay?"
+
+  utter_goodbye:
+    - text: "Tạm biệt! Hẹn gặp lại bạn sau."
+
+  utter_search_results:
+    - text: "Tôi đã tìm thấy những sản phẩm sau: {search_results}"
+
+  utter_no_results:
+    - text: "Xin lỗi, tôi không tìm thấy sản phẩm nào phù hợp với yêu cầu của bạn."
+
+  utter_ask_more_info:
+    - text: "Bạn có thể cung cấp thêm thông tin về sản phẩm bạn đang tìm kiếm không?"
+
+  utter_thank:
+    - text: "Rất vui được giúp đỡ bạn!"
+
+  utter_default:
+    - text: "Xin lỗi, tôi không hiểu. Bạn có thể nói lại được không?"
+
+
+actions:
+- action_session_start
+- action_fetch_entities
+- action_search_products
+- action_restart_session
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

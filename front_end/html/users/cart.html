@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiaoMiao</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/users/user_index.css" rel="stylesheet">
+    <link href="../../css/users/carts.css" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+
+    </header>
+
+    <main class="py-5 mx-5">
+        <h2 class="mb-4">Giỏ hàng</h2>
+        <div class="">
+            <table class="table table-responsive cart-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="d-flex align-items-center gap-2 custom-checkbox">
+                                <input type="checkbox" id="selectAll">
+                                <label for="selectAll" class="text-nowrap">Chọn tất cả</label>
+                            </div>
+                        </th>
+                        <th class="text-center">Sản phẩm</th>
+                        <th class="text-center">Phân loại</th>
+                        <th class="text-center">Giá</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItemContainer">  
+                    <!-- load cart item -->
+                </tbody>
+
+            </table>
+            <div id="loading-indicator" class="d-flex justify-content-center align-items-center loading-indicator">
+                <span>Đang tải...</span>
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="checkoutCard" class="cart-footer sticky">
+        <span class="pe-md-4">Tổng tiền: <strong class="total-amount"></strong></span>
+        <button id="checkoutBtn" class="btn btn-primary custom-btn-checkout px-4 ms-3">Thanh toán</button>
+    </div>
+    
+    <footer id="footer">
+        
+    </footer>
+
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><strong>Danh sách sản phẩm</strong></h6>
+                    <table class="table table-responsive cart-table order-table">
+                        <tbody id="orderItemContainer">
+                            <!-- load cart item -->
+                        </tbody>
+                    </table>
+                    
+                    <h6><strong>Địa chỉ giao hàng: </strong></h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div id="nameAddressDisplay"></div>
+                            <div id="phoneAddressDisplay"></div>
+                            <div id="emailAddressDisplay" style="display: none;"></div>
+                            <div>Địa chỉ:
+                                <span id="detailSpanDisplay"></span> 
+                                <span id="wardSpanDisplay"></span> 
+                                <span id="districtSpanDisplay"></span>
+                                <span id="provinceSpanDisplay"></span>
+                            </div>
+                        </div>
+                        <div class="d-flex col-3 justify-content-end">
+                            <button class="btn btn-warning custom-btn-checkout" id="selected-address"><i class="bi bi-arrow-repeat"></i> Thay đổi địa chỉ</button>
+                        </div>
+                    </div>
+                    <div id="address-options" class="hidden-content mt-2">
+                        <hr>
+                        <table class="table table-responsive cart-table address-table">
+                            <!-- <label class="d-block"><input type="radio" name="address" value="Nguyễn Văn A - 0123456789 - Hà Nội" checked> Nguyễn Văn A - 0123456789 - Hà Nội</label>
+                            <label class="d-block"><input type="radio" name="address" value="Trần Thị B - 0987654321 - TP.HCM"> Trần Thị B - 0987654321 - TP.HCM</label> -->
+                            <tbody id="addressItemContainer">
+                                <!-- load cart item -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    
+                    <div>
+                        <div class="d-flex align-items-center justify-content-start gap-3">
+                            <h6><strong>Mã giảm giá:</strong></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="ms-2" id="selectedCouponDisplay">
+
+                            </span>
+                            <button class="btn btn-warning custom-btn-checkout" id="openCouponModal">
+                                <i class="bi bi-gift"></i>
+                                Chọn mã giảm giá
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <h6><strong>Phương thức thanh toán</strong></h6>
+                    <button class="btn btn-outline-secondary w-100" id="selected-payment">Chọn phương thức thanh toán</button>
+                    <div id="payment-options" class="hidden-content mt-2">
+                        <!-- <label class="d-block"><input type="radio" name="payment" value="cod" checked> Thanh toán khi nhận hàng</label>
+                        <label class="d-block"><input type="radio" name="payment" value="bank" disabled> Thẻ ngân hàng <span class="text-note">(Đang phát triển)</span></label>
+                        <label class="d-block"><input type="radio" name="payment" value="e-wallet" disabled> Ví điện tử <span class="text-note">(Đang phát triển)</span></label> -->
+                    </div>
+                    <hr>
+                    
+                    <h6><strong>Tổng đơn hàng</strong></h6>
+                    <p>Tổng tiền: <strong id="totalAmount" class="total-amount"></strong></p>
+                    <p>Phí vận chuyển: <strong id="deliveryFee"></strong></p>
+                    <p>Giảm giá: <strong id="discountAmount" data-discount="0"></strong></p>
+                    <p><b>Thành tiền: <span id="finalAmount"></span></b></p>
+                    <button class="btn btn-success w-100 mt-2" id="confirmOrder">Xác nhận đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupon Modal -->
+    <div class="modal fade child-modal" id="couponModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chọn mã giảm giá</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Phần nhập mã thủ công -->
+                    <div class="mb-4">
+                        <label for="manualCoupon" class="form-label">Nhập mã giảm giá thủ công</label>
+                        <div class="d-flex justify-content-center align-items-center input-group">
+                            <!-- <input type="checkbox" id="manualCouponCheckbox" class="checkbox-coupon me-2"> -->
+                            <input type="text" class="form-control" id="manualCoupon" placeholder="Nhập mã giảm giá">
+                            <!-- <button class="btn btn-outline-secondary" type="button" id="checkManualCoupon">Kiểm tra</button> -->
+                            <div class="valid-feedback">
+                                
+                            </div>
+                            <div class="invalid-feedback">
+                                
+                            </div>
+                            
+                        </div>
+                        <div id="manual-coupon-feedback" class="form-text text-danger"></div>
+                    </div>
+                    
+                    <!-- Phần mã giảm giá khả dụng -->
+                    <div id="available-coupons-section" class="coupon-section">
+                        <!-- <h6>Mã giảm giá khả dụng</h6> -->
+                        <div id="available-coupons-list">
+                        </div>
+                        <div id="no-available-coupons" class="no-coupon-message" style="display: none;">
+                            Không có mã giảm giá khả dụng
+                        </div>
+                    </div>
+                    
+                    <!-- Phần mã giảm giá không khả dụng -->
+                    <div id="unavailable-coupons-section" class="coupon-section">
+                        <h6>Mã giảm giá không khả dụng</h6>
+                        <div id="unavailable-coupons-list">
+                        
+                        </div>
+                        <!-- <div id="no-unavailable-coupons" class="no-coupon-message" style="display: none;">
+                            Không có mã giảm giá không khả dụng
+                        </div> -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="applyCoupon">Áp dụng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade child-modal" id="addressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="addressCheckoutForm" class="modal-content need-validation" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title">Địa chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label for="nameAddressModal">Tên người nhận:</label>
+                        <input type="text" id="nameAddressModal" name="nameAddressModal" placeholder="Nguyễn Văn A..." class="form-control custom-input" required>
+                        <div class="invalid-feedback">
+                            Vui lòng nhập tên người nhận hàng
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phoneNumberModal">Số điện thoại:</label>
+                        <input type="text" id="phoneNumberModal" name="phoneNumberModal" placeholder="0123456789" class="form-control custom-input" required>
+                        <div class="invalid-feedback">
+                            Vui lòng nhập số điện thoại
+                        </div>
+                    </div>
+                    <div>
+                        <label for="emailModal">Email:</label>
+                        <input type="email" id="emailModal" name="emailModal" placeholder="example123@example.com" class="form-control custom-input">
+                        <div class="invalid-feedback">
+                            Vui lòng nhập email
+                        </div>
+                    </div>
+                    <!-- <div class="d-flex gap-3 flex-wrap">                -->
+                        <div>
+                            <div for="provinceModal">Tỉnh/Thành:</div>
+                            <select id="provinceModal" name="provinceModal" class="form-select" required>
+                                <option value="-99999" selected disabled>Chọn tỉnh/thành phố TW</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Vui lòng chọn tỉnh/thành phố
+                            </div>
+                        </div>
+                        <div>
+                            <div for="districtModal">Huyện/Quận/Thành:</div>
+                            <select id="districtModal" name="districtModal" class="form-select" required>
+                                <option value="-99999" selected disabled>Chọn huyện/quận/thành</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Vui lòng chọn huyện/quận/thành phố
+                            </div>
+                        </div>                           
+                        <div >
+                            <div for="wardModal">Xã/Phường/Thị trấn:</div>
+                            <select id="wardModal" name="wardModal" class="form-select" required>
+                                <option value="-99999" selected disabled>Chọn xã/phường/thị trấn</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Vui lòng chọn xã/phường/thị trấn
+                            </div>
+                        </div>
+                    
+                    <!-- </div>            -->
+                    <div>
+                        <label for="detailAddressModal">Số nhà/Văn phòng/Tòa nhà/Tầng :</label>
+                        <input type="text" id="detailAddressModal" name="detailAddressModal" placeholder="Số 123, tòa nhà A, đường B.../ấp C... " class="form-control custom-input">
+                        <div class="invalid-feedback"></div>
+                    </div>        
+                </div>
+                <div class="modal-footer d-flex align-items-center justify-content-center gap-2">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-sub" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/users/user_index.js"></script>
+    <script src="../../js/users/cart.js"></script>
+    <script src="../../js/users/order.js"></script>
+    <script src="../../js/login.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/register.js"></script>
+    <script src="../../js/address.js"></script>
+    <script src="../../js/external_address_api.js"></script>
+
+</body>
+</html>

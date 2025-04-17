@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyNest Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/admins/admin_index.css" rel="stylesheet">
+    <link href="../../css/admins/product_detail.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="content">
+        <!-- Top Navigation -->
+        <div id="navbar">
+
+        </div>
+        
+        <!-- Form Content -->
+        <div class="container-fluid">
+            <h2 class="page-title">Nhập lô hàng mới</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-wrapper">
+                        <form id="batchForm" class="needs-validation" novalidate>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="batchNumber">Số lô:</label>
+                                        <input class="form-control custom-input" type="text" id="batchNumber" name="batchNumber" placeholder="Số lô..." required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập số lô
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="origin"></label>Xuất xứ:</label>
+                                        <input id="origin" class="form-control custom-input" type="text" name="origin" placeholder="Xuất xứ..." required>    
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập xuất xứ của lô hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="itemQuantity"></label>Số lượng:</label>
+                                    <input id="itemQuantity" class="form-control custom-input" type="text" name="itemQuantity" placeholder="Số lượng sản phẩm..." required>    
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập số lượng hàng trong lô hàng
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="manufacturingDate"></label>Ngày sản xuất:</label>
+                                        <input id="manufacturingDate" class="form-control custom-input" type="date" name="manufacturingDate" placeholder="Ngày sản xuất..." required>    
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập ngày sản xuất
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="expiryDate"></label>Hạn sử dụng:</label>
+                                        <input id="expiryDate" class="form-control custom-input" type="date" name="expiryDate" placeholder="Hạn sử dụng..." required>    
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập hạn sử dụng
+                                        </div>
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="mb-4">
+                                <label for="productSelector">Sản phẩm:</label>
+                                <select id="productSelector" name="productSelector" class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Chọn sản phẩm</option>
+                                    <!-- Danh mục sản phẩm -->
+                                </select>                                
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập chọn sản phẩm trong lô hàng
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="pb-3">Phân loại:</label>
+                                <div class="d-flex flex-column gap-3 pb-3" id="variantList">
+                                    <!-- Danh sách input phân loại sản phẩm -->
+                                </div>
+                                <div class="pb-3">
+                                    <input type="text" id="invalidVariant" hidden>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div>  
+                                    <button onclick="addVariant()" type="button" class="btn btn-primary btn-add-textbox d-flex align-items-center justify-content-center" id="addVariantBtn">
+                                        <b><i class="bi bi-plus"></i></b>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        
+                            
+                            <div class="d-flex justify-content-end">
+                                <!-- <button type="button" class="btn btn-outline-secondary me-2">Hủy</button> -->
+                                <button id="batchFormSubmitBtn" type="submit" class="btn btn-primary sticky-btn"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="variant-sidebar d-flex gap-3 flex-column" id="variantSidebar">
+        <div class="d-flex justify-content-between align-items-center   ">
+            <h4><strong>Thông tin phân loại</strong></h4>
+            <button class="btn btn-close" onclick="toggleVariantSidebar()"><i class="bi bi-x-circle"></i></button>
+        </div>
+        <div>
+            <p>
+                <strong>Tên phân loại:</strong>
+                <span id="variantNameSpan"></span>
+            </p>
+            <p>
+                <strong>Tổng tồn kho:</strong>
+                <span id="variantStockSpan"></span>
+            </p>
+            <p>
+                <strong>Giá bán hiện tại:</strong>
+                <span id="variantPriceSpan"></span>
+            </p>
+        </div>
+        
+        <h6>Thông tin tồn kho</h6>
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>  
+                    <th class="text-center">Số lô</th>                 
+                    <th class="text-center">Ngày sản xuất</th>
+                    <th class="text-center">Hạn sử dụng</th>
+                    <th class="text-center">Tồn kho</th>
+                </tr>
+            </thead>
+            <tbody id="stockList">
+            </tbody>
+        </table>
+        
+        <h6>Lịch sử giá bán</h6>
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th> 
+                    <th class="text-center">Ngày bắt đầu</th>
+                    <th class="text-center">Ngày kết thúc</th>
+                    <th class="text-center">Giá bán</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="priceList">
+            </tbody>
+        </table>
+        
+        <div class="sticky-buttons">
+            <div>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#newVariantNameModal">Sửa tên phân loại</button>
+                <button class="btn btn-primary" onclick="showNewPriceModal()">Nhập giá bán mới</button>
+            </div>
+        </div>
+        <button onclick="scrollToTop()" class="scroll-to-top"><i class="bi bi-arrow-up"></i></button> 
+    </section>
+
+    <section class="modal fade" id="newVariantNameModal" tabindex="-1" aria-labelledby="newVariantNameModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="newVariantNameForm" class="modal-content needs-validation" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newVariantNameModalLabel">
+                        Thay đổi tên phân loại
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body d-xl-flex gap-1">
+                    <div class="input-group">
+                        <label for="newVariantName" class="input-group-text">Tên phân loại mới:</label>
+                        <input type="text" class="form-control" name="newVariantName" id="newVariantName" placeholder="Nhập tên phân loại..." required>
+                        <div class="invalid-feedback">
+                            Vui lòng nhập tên phân loại mới
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer d-flex gap-1 justify-content-center">     
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="priceForm" class="modal-content needs-validation" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="priceModalLabel">
+                        Thêm giá bán mới
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-column gap-3">
+                    <div class="input-group">
+                        <label for="startDateTime" class="input-group-text">Ngày bắt đầu:</label>
+                        <input type="datetime-local" class="form-control" name="startDateTime" id="startDateTime" required>
+                        <div class="invalid-feedback">
+                            Ngày bắt đầu không hợp lệ
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="endDateTime" class="input-group-text">Ngày kết thúc:</label>
+                        <input type="datetime-local" class="form-control" name="endDateTime" id="endDateTime" required>
+                        <div class="invalid-feedback">
+                            Ngày kết thúc không hợp lệ
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="newPrice" class="input-group-text">Giá bán:</label>
+                        <input type="text" class="form-control" name="newPrice" id="newPrice" placeholder="Nhập giá bán..." required>
+                        <div class="invalid-feedback">
+                            Vui lòng nhập giá bán
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex gap-1 justify-content-center">     
+                    <button id="priceFormSubmitBtn" type="submit" class="btn btn-primary" data-action="create">Lưu</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="modal fade" id="warningPriceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningPriceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header warning">
+                    <h5 class="modal-title" id="warningPriceModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <span id="price-warning-message">
+        
+                    </span>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" id="confirmSavingBtn" class="btn btn-primary">Có, tôi chắc chắn lưu</button>
+                    <button type="button" id="confirmEditingBtn" class="btn btn-warning">Không, tôi cần chỉnh sửa</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modal fade" id="newTagModal" tabindex="-1" aria-labelledby="ingredientModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ingredientModalLabel">Thêm thẻ mới</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="confirm-creating">
+                        <span> Bạn có chắc chắn thêm </span>
+                        <span id="new-option">
+                            <!-- Hiển thị ingredient mới được thêm -->
+                        </span>
+                        <span>vào danh sách hiện tại không?</span>
+                    </div>
+                    <div id="available-option-container">
+                        <div >
+                            Dưới đây là một số thành phần tương tự được tìm thấy, hãy kiểm tra kĩ trùng lặp trước khi xác nhận thêm mới:
+                        </div>
+                        <div id="available-options">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex gap-1 justify-content-center">     
+                    <button type="button" id="save-tag-btn" class="btn btn-primary">
+                        Lưu   
+                    </button>
+                    <button type="button" id="cancel-saving-tag-btn" class="btn btn-warning" data-bs-dismiss="modal">
+                        Hủy
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+   
+
+    <section id="additional-modal-section">
+
+    </section>
+    <section class="modal fade" id="warning-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="warningModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="warning-message">
+                        Nếu tiếp tục, các chỉnh sửa sẽ không được lưu. Bạn có muốn ở lại trang không?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="keep-page-btn" class="btn btn-content" data-bs-dismiss="modal">Ở lại</button>
+                    <button type="button" id="confirm-exit-btn" class="btn btn-danger">Rời đi</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/products/batch_detail.js"></script>
+</body>
+</html>

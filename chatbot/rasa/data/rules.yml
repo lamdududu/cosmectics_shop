@@ -1,0 +1,17 @@
+version: "3.1"
+
+rules:
+- rule: Say goodbye anytime
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say thank you anytime
+  steps:
+  - intent: thank
+  - action: utter_thank
+
+- rule: Out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_default

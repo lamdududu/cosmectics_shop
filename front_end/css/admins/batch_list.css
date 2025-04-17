@@ -1,0 +1,25 @@
+.fw-semibold { 
+    max-width: 400px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fw-semibold:hover {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+td:nth-child(2) { 
+    min-width: 100px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td:nth-child(2):hover {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+}

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --mint: #a3e4d7;
+            --light-mint: #d1f2eb;
+            --dark-mint: #72c7b9;
+            --peach: #fadbd8;
+            --lavender: #e8daef;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-color: #eaeaea;
+            --light-yellow: #fef9e7;
+            --warning-color: rgb(230, 147, 147);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5d6d7e;
+            background-color: #f8f9fa;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--mint);
+        }
+        
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .product-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background-color: white;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--mint);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--mint);
+            color: var(--text-dark);
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .product-brand {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-weight: normal;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .discount-percent {
+            color: var(--warning-color);
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .rating-stars {
+            color: gold;
+            margin-right: 10px;
+        }
+        
+        .review-count {
+            color: var(--text-muted);
+        }
+        
+        .product-availability {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .availability-status {
+            color: var(--dark-mint);
+            margin-left: 5px;
+            font-weight: 600;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: var(--light-mint);
+            border: none;
+            color: var(--text-dark);
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--mint);
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            text-align: center;
+            margin: 0 10px;
+            outline: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--mint);
+            border-color: var(--mint);
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-mint);
+            border-color: var(--dark-mint);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--mint);
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light-mint);
+        }
+        
+        .wishlist-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background-color: var(--light-mint);
+            border: none;
+            color: var(--text-dark);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            background-color: var(--peach);
+            color: #e74c3c;
+        }
+        
+        .product-meta {
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .meta-item {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            width: 100px;
+        }
+        
+        .product-description {
+            margin-top: 30px;
+        }
+        
+        .description-content {
+            line-height: 1.6;
+        }
+        
+        .product-tabs {
+            margin-top: 50px;
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: 0;
+            margin-right: 20px;
+            position: relative;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--text-dark);
+            background-color: transparent;
+        }
+        
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--mint);
+        }
+        
+        .tab-content {
+            padding: 30px 0;
+        }
+        
+        .related-products {
+            margin-top: 50px;
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(163, 228, 215, 0.2);
+        }
+        
+        .product-card img {
+            height: 200px;
+            object-fit: contain;
+            background-color: white;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            height: 3em;
+        }
+        
+        .card-brand {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        
+        .card-price {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <main class="py-5">
+        <div class="container">
+            <!-- Product Information -->
+            <div class="row mb-5">
+                <!-- Product Images -->
+                <div class="col-md-6 mb-4">
+                    <div class="product-image-container">
+                        <img src="/api/placeholder/500/500" alt="Product Image" class="product-main-image">
+                        <span class="product-badge">New Arrival</span>
+                    </div>
+                    <div class="thumbnail-container">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 1" class="thumbnail active">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 2" class="thumbnail">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 3" class="thumbnail">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 4" class="thumbnail">
+                    </div>
+                </div>
+                
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <h2 class="product-title">Hydrating Rose Water Facial Toner</h2>
+                    <p class="product-brand">Brand: Natural Beauty</p>
+                    
+                    <div class="product-price">
+                        $24.99 <span class="original-price">$29.99</span> <span class="discount-percent">-17%</span>
+                    </div>
+                    
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half"></i>
+                        </div>
+                        <span class="review-count">4.5 (128 reviews)</span>
+                    </div>
+                    
+                    <div class="product-availability">
+                        <i class="fas fa-check-circle" style="color: var(--dark-mint)"></i>
+                        <span class="availability-status">In Stock (24 items)</span>
+                    </div>
+                    
+                    <p class="short-description mb-4">
+                        A refreshing alcohol-free toner that helps balance skin's pH while providing hydration and preparing your skin for the next steps in your skincare routine.
+                    </p>
+                    
+                    <div class="quantity-selector">
+                        <span class="me-3">Quantity:</span>
+                        <button class="quantity-btn">-</button>
+                        <input type="text" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <button class="btn btn-primary me-3">
+                            <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline me-3">Buy Now</button>
+                        <button class="wishlist-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">SKU:</span>
+                            <span>NB-TN-001</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Category:</span>
+                            <span>Skincare, Toners</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Tags:</span>
+                            <span>Natural, Hydrating, Alcohol-Free</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Details</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews (128)</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="productTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="description-content">
+                            <p>Our Hydrating Rose Water Facial Toner is a gentle, alcohol-free formula that helps to balance your skin's pH levels after cleansing while providing deep hydration. Made with natural rose water, this toner soothes and refreshes your skin, preparing it perfectly for the next steps in your skincare routine.</p>
+                            
+                            <p>Key benefits:</p>
+                            <ul>
+                                <li>Balances skin's pH levels</li>
+                                <li>Provides hydration and prevents dryness</li>
+                                <li>Soothes and refreshes tired skin</li>
+                                <li>Minimizes the appearance of pores</li>
+                                <li>Prepares skin for better absorption of serums and moisturizers</li>
+                            </ul>
+                            
+                            <p>Our toner is suitable for all skin types, particularly beneficial for normal to dry skin. Use twice daily after cleansing for best results.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Product Details</h5>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Volume:</strong></td>
+                                            <td>200ml / 6.76 fl oz</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Ingredients:</strong></td>
+                                            <td>Rose Distillate (Rosa Damascena), Aloe Vera Leaf Juice, Glycerin, Panthenol, Allantoin, Sodium Hyaluronate, Niacinamide</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Made in:</strong></td>
+                                            <td>USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Shelf Life:</strong></td>
+                                            <td>12 months after opening</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">How to Use</h5>
+                                <ol>
+                                    <li>Apply to clean skin after cleansing.</li>
+                                    <li>Pour a small amount onto a cotton pad or into palms.</li>
+                                    <li>Gently pat onto face and neck.</li>
+                                    <li>Allow to dry before applying serums or moisturizers.</li>
+                                    <li>Use morning and evening for best results.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h2 class="mb-0">4.5</h2>
+                                        <div class="rating-stars my-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half"></i>
+                                        </div>
+                                        <p class="mb-0">Based on 128 reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="review-item mb-4 pb-4" style="border-bottom: 1px solid var(--border-color);">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="mb-0">Maria J.</h5>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small mb-2">Verified Purchase - March 15, 2025</p>
+                                    <p>This toner is amazing! My skin feels so refreshed and hydrated after using it. I've noticed a significant improvement in my skin's texture within just two weeks of use. The rose scent is subtle and pleasant too.</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="mb-0">John D.</h5>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small mb-2">Verified Purchase - February 28, 2025</p>
+                                    <p>Great product for my sensitive skin. No irritation and it does a good job of preparing my skin for moisturizer. The bottle is also well-designed and dispenses just the right amount.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline">View All Reviews</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="related-products">
+                <h3 class="section-title mb-4">You May Also Like</h3>
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card product-card">
+                            <img src="/api/placeholder/300/300" class="card-img-top" alt="Related Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Vitamin C Brightening Serum</h5>
+                                <p class="card-brand">Natural Beauty</p>
+                                <p class="card-price">$34.99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card product-card">
+                            <img src="/api/placeholder/300/300" class="card-img-top" alt="Related Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Hydrating Face Cream</h5>
+                                <p class="card-brand">Natural Beauty</p>
+                                <p class="card-price">$29.99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card product-card">
+                            <img src="/api/placeholder/300/300" class="card-img-top" alt="Related Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Gentle Foaming Cleanser</h5>
+                                <p class="card-brand">Natural Beauty</p>
+                                <p class="card-price">$19.99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="card product-card">
+                            <img src="/api/placeholder/300/300" class="card-img-top" alt="Related Product">
+                            <div class="card-body">
+                                <h5 class="card-title">Overnight Recovery Mask</h5>
+                                <p class="card-brand">Natural Beauty</p>
+                                <p class="card-price">$39.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</script>
+</body>
+</html>

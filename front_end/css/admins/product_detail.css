@@ -1,0 +1,88 @@
+.variant-sidebar {
+    position: fixed;
+    top: 0; 
+    right: -100%;
+    width: calc(100% - 250px);
+    height: calc(100vh); 
+    background: white;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 10;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.variant-sidebar.show {
+    right: 0;
+}
+
+.variant-sidebar h4 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+}
+.variant-sidebar .btn-close {
+    background: none;
+    font-size: 1.2rem;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+.variant-sidebar .btn-close:hover {
+    color: var(--primary-color);
+}
+.variant-sidebar table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.variant-sidebar .sticky-buttons {
+    position: sticky;
+    bottom: 0;
+    /* background: white; */
+    padding: 10px;
+    /* border-top: 1px solid #ddd; */
+    display: none;
+    gap: 10px;
+    /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.variant-sidebar .sticky-buttons button {
+    opacity: 0.5;
+}
+
+.variant-sidebar .sticky-buttons button:hover {
+    opacity: 1;
+}
+
+.variant-sidebar.show .sticky-buttons {
+    display: flex;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 3rem;
+    background: var(--fourth-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.variant-sidebar.show .scroll-to-top {
+    display: flex;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-bg-type: white;
+}
+
+.table>thead>tr>th {
+    background-color: var(--light-mint) !important;
+}

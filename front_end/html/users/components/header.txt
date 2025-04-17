@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">MiaoMiao</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Danh mục
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Chăm sóc da</a></li>
+                            <li><a class="dropdown-item" href="#">Trang điểm</a></li>
+                            <li><a class="dropdown-item" href="#">Chăm sóc tóc</a></li>
+                            <li><a class="dropdown-item" href="#">Nước hoa</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Bộ sản phẩm</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./product_list.html">Sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Về chúng tôi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tin tức</a>
+                    </li>
+                </ul>
+                
+                <div id="rightNav" class="d-flex align-items-center ms-auto">
+                    <!-- Search Box -->
+                    <div class="search-box d-flex align-items-center me-3 px-3">
+                        <input class="form-control form-control-sm border-0 me-2 search-input" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                        <button class="search-button" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>

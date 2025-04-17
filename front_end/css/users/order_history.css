@@ -1,0 +1,64 @@
+.order-history {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.order-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.order-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.order-status.pending {
+    background: orange;
+    color: white;
+}
+
+.order-status.shipped {
+    background: blue;
+    color: white;
+}
+
+.order-status.completed {
+    background: green;
+    color: white;
+}
+
+.order-status.cancelled {
+    background: red;
+    color: white;
+}
+
+.order-body p {
+    margin: 5px 0;
+}
+
+.product-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}

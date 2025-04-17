@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiaoMiao</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/users/user_index.css" rel="stylesheet">
+    <link href="../../css/users/product_detail.css  " rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            <!-- Product Information -->
+            <div class="row mb-5 align-items-center">
+                <!-- Product Images -->
+                <div class="col-md-6 mb-4">
+                    <div class="product-image-container">
+                        <img id='productImg' src="" alt="Product Image" class="product-main-image">
+                        <!-- <span class="product-badge">New Arrival</span> -->
+                    </div>
+                    <div id="thumbnailContainer" class="thumbnail-container">
+                        <!-- <img src="/api/placeholder/80/80" alt="Thumbnail 1" class="thumbnail active">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 2" class="thumbnail">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 3" class="thumbnail">
+                        <img src="/api/placeholder/80/80" alt="Thumbnail 4" class="thumbnail"> -->
+                    </div>
+                </div>
+                
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <h2 id="productName" class="product-title-detail"></h2>
+                    <p  class="product-brand">Thương hiệu: <span class="productBrand"></span></p>
+                    
+                    <div class="product-price-detail">
+                        <span id="productPrice"></span> <span id="originalPrice" class="original-price"> </span> <span id="discountPercentage" class="discount-percent"> </span>
+                    </div>
+           
+                    <div class="product-availability">
+                        <i class="fas fa-check-circle" style="color: var(--dark-mint)"></i>
+                        <span id="availabilityStatus" class="availability-status">Còn hàng (<span id="stockInfo"></span>)</span>
+                    </div>
+                    
+                    <p class="short-description mb-4" class="variant-buttons" id="variantContainer">
+                        
+                    </p>
+                    
+                    <div class="quantity-selector">
+                        <span class="me-3">Quantity:</span>
+                        <button class="quantity-btn">-</button>
+                        <input type="number" id="quantity" class="quantity-input" value="1">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <button id="addToCartBtn" class="btn btn-primary me-3">
+                            <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+                        </button>
+                        <button id="buyNowBtn" class="btn btn-outline me-3">Buy Now</button>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Details</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="productTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="description-content">
+                            <p>Our Hydrating Rose Water Facial Toner is a gentle, alcohol-free formula that helps to balance your skin's pH levels after cleansing while providing deep hydration. Made with natural rose water, this toner soothes and refreshes your skin, preparing it perfectly for the next steps in your skincare routine.</p>
+                            
+                            <p>Key benefits:</p>
+                            <ul>
+                                <li>Balances skin's pH levels</li>
+                                <li>Provides hydration and prevents dryness</li>
+                                <li>Soothes and refreshes tired skin</li>
+                                <li>Minimizes the appearance of pores</li>
+                                <li>Prepares skin for better absorption of serums and moisturizers</li>
+                            </ul>
+                            
+                            <p>Our toner is suitable for all skin types, particularly beneficial for normal to dry skin. Use twice daily after cleansing for best results.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="mb-3">Product Details</h5>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Thương hiệu:</strong></td>
+                                            <td class="productBrand"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Danh mục:</strong></td>
+                                            <td id="productCategory"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Thành phần:</strong></td>
+                                            <td id="ingredients"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Tags:</strong></td>
+                                            <td id="tags"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <h5 class="mb-3">How to Use</h5>
+                                <ol>
+                                    <li>Apply to clean skin after cleansing.</li>
+                                    <li>Pour a small amount onto a cotton pad or into palms.</li>
+                                    <li>Gently pat onto face and neck.</li>
+                                    <li>Allow to dry before applying serums or moisturizers.</li>
+                                    <li>Use morning and evening for best results.</li>
+                                </ol>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <!-- <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body text-center">
+                                        <h2 class="mb-0">4.5</h2>
+                                        <div class="rating-stars my-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half"></i>
+                                        </div>
+                                        <p class="mb-0">Based on 128 reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="review-item mb-4 pb-4" style="border-bottom: 1px solid var(--border-color);">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="mb-0">Maria J.</h5>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small mb-2">Verified Purchase - March 15, 2025</p>
+                                    <p>This toner is amazing! My skin feels so refreshed and hydrated after using it. I've noticed a significant improvement in my skin's texture within just two weeks of use. The rose scent is subtle and pleasant too.</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="mb-0">John D.</h5>
+                                        <div class="rating-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small mb-2">Verified Purchase - February 28, 2025</p>
+                                    <p>Great product for my sensitive skin. No irritation and it does a good job of preparing my skin for moisturizer. The bottle is also well-designed and dispenses just the right amount.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline">View All Reviews</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="related-products">
+                <h3 class="section-title mb-4">You May Also Like</h3>
+                <div id="relatedProductContainer" class="row related-product-container">
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer id="footer">
+        
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/users/user_index.js"></script>
+    <script src="../../js/users/product_detail.js"></script>
+    <script src="../../js/login.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/register.js"></script>
+    <script src="../../js/external_address_api.js"></script>
+
+</body>
+</html>

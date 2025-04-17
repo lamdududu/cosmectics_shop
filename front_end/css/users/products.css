@@ -1,0 +1,36 @@
+.banner {
+    background: url('../../images/mau-thiet-ke-noi-that-phong-khach-hien-dai-2.jpg') no-repeat center bottom/cover;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    padding: 10px;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.filter-container {
+    background: white;
+    padding: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-container select, .filter-container input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main {
+    margin-top: 1.8rem;
+}

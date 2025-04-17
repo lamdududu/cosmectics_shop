@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyNest Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/admins/admin_index.css" rel="stylesheet">
+    <link href="../../css/admins/product_detail.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="content">
+        <!-- Top Navigation -->
+        <div id="navbar">
+
+        </div>
+        
+        <!-- Form Content -->
+        <div class="container-fluid">
+            <h2 class="page-title">Nhập mã giảm mới</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-wrapper">
+                        <form id="couponForm" class="need-validation" novalidate>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="couponCode">Mã giảm giá:</label>
+                                        <input class="form-control custom-input" type="text" id="couponCode" name="couponCode" placeholder="Mã giảm giá...">
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập mã giảm giá
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="couponDescription">Nhập mô tả:</label>
+                                        <input class="form-control custom-input" type="text" id="couponDescription" name="couponDescription" placeholder="Mô tả...">
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập mã giảm giá
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="discountPercentage">Tỉ lệ giảm giá (%): 
+                                        
+                                        </label>
+                                        <div class="text-note"><i> </i></div>
+                                        <input id="discountPercentage" class="form-control custom-input" type="number" step="0.01" name="discountPercentage">    
+                                        <div class="invalid-feedback">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="startDate"></label>Ngày bắt đầu:</label>
+                                        <input id="startDate" class="form-control custom-input" type="datetime-local" name="startDate" placeholder="Ngày bắt đầu..." required>    
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập ngày bắt đầu hiệu lực
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="endDate"></label>Ngày kết thúc:</label>
+                                        <input id="endDate" class="form-control custom-input" type="datetime-local" name="endDate" placeholder="Ngày kết thúc..." required>    
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập ngày kết thúc hiệu lực
+                                        </div>
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="minAmount">Giá trị đơn hàng tối thiểu: 
+                                        
+                                        </label>
+                                        <div class="text-note"><i>*Có thể bỏ qua nếu không giới hạn giá trị đơn hàng được áp dụng</i></div>
+                                        <input id="minAmount" class="form-control custom-input" type="number" step="1000" name="minAmount">    
+                                        <div class="invalid-feedback">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="maxDiscount">Giá trị giảm giá tối đa: 
+                                        
+                                        </label>
+                                        <div class="text-note"><i>*Có thể bỏ qua nếu không giới hạn giá trị giảm giá</i></div>
+                                        <input id="maxDiscount" class="form-control custom-input" type="number" step="1000" name="maxDiscount">    
+                                        <div class="invalid-feedback">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="usageLimits">Giới hạn sử dụng: 
+                                    
+                                        </label>
+                                        <div class="text-note"><i>*Có thể bỏ qua nếu không giới hạn lượt sử dụng</i></div>
+                                        <input id="usageLimits" class="form-control custom-input" type="number" step="1" name="usageLimits">    
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>       
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="usageCount">Lượt sử dụng:</label>
+                                        <div class="text-note"><i>*Lượt sử dụng mã giảm của khách hàng, không thể nhập</i></div>
+                                        <input id="usageCount" class="form-control custom-input" type="number" step="1" name="usageCount">    
+                                        <div class="invalid-feedback">
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="couponType">Trạng thái:</label>
+                                        <div class="px-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="couponStatus" id="isPublic" checked>
+                                                <label class="form-check-label" for="isPublic">Công khai <span class="text-note">(hiển thị với khách hàng)</span></label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="couponStatus" id="isHidden">
+                                                <label class="form-check-label" for="isHidden">Ẩn <span class="text-note">(không hiển thị với khách hàng)</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>       
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="couponType">Loại mã giảm giá:</label>
+                                        <div class="px-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="couponType" id="notStackable" checked>
+                                                <label class="form-check-label" for="notStackable">Không xếp chồng <span class="text-note">(chỉ áp dụng mã riêng lẻ)</span></label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="couponType" id="isStackable">
+                                                <label class="form-check-label" for="isStackable">Cho phép xếp chồng <span class="text-note">(được áp dụng nhiều mã cùng lúc)</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>               
+                            </div>
+                            
+                        
+                            
+                            <div class="d-flex justify-content-end">
+                                <!-- <button type="button" class="btn btn-outline-secondary me-2">Hủy</button> -->
+                                <button id="couponFormSubmitBtn" type="submit" class="btn btn-primary sticky-btn"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+   
+
+    <section id="additional-modal-section">
+
+    </section>
+    <section class="modal fade" id="warning-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="warningModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="warning-message">
+                        Nếu tiếp tục, các chỉnh sửa sẽ không được lưu. Bạn có muốn ở lại trang không?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="keep-page-btn" class="btn btn-content" data-bs-dismiss="modal">Ở lại</button>
+                    <button type="button" id="confirm-exit-btn" class="btn btn-danger">Rời đi</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/discounts/coupon_detail.js"></script>
+</body>
+</html>

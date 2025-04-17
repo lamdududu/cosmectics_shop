@@ -1,0 +1,74 @@
+version: "3.1"
+
+stories:
+- story: greet and search product
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - category: "toner"
+  - action: action_search_products
+  # - action: utter_search_results
+  - action: action_listen
+
+- story: greet and search product
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - tag: "chống lão hóa"
+  - action: action_search_products
+  # - action: utter_search_results
+  - action: action_listen
+
+- story: greet and search product
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - brand: "Graymelin"
+  - action: action_search_products
+  # - action: utter_search_results
+  - action: action_listen
+
+- story: search product with multiple criteria
+  steps:
+  - intent: search_product
+    entities:
+    - category: "toner"
+    - brand: "Dear Klairs"
+    - price_range: "dưới 300 ngàn"
+  - action: action_search_products
+  # - action: utter_search_results
+  - action: action_listen
+  
+- story: thank and goodbye
+  steps:
+  - intent: thank
+  - action: utter_thank
+  - intent: goodbye
+  - action: utter_goodbye
+
+# - story: direct search and goodbye
+#   steps:
+#   - intent: search_product
+#     entities:
+#     - product: "iPhone 13"
+#   - action: action_search_products
+#   - action: utter_search_results
+#   - intent: goodbye
+#   - action: utter_goodbye
+
+- story: no results found
+  steps:
+  - intent: search_product
+    entities:
+    - product_category: "máy giặt"
+    - brand: "không tồn tại"
+  - action: action_search_products
+  # - action: utter_no_results
+  - action: utter_ask_more_info
+  - action: action_listen

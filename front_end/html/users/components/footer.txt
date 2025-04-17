@@ -1,0 +1,87 @@
+<div class="footer pt-5 pb-3">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Logo and About -->
+            <div class="col-lg-3 col-md-6">
+                <a class="footer-logo d-inline-block h4 mb-4" href="#">BeautyNest</a>
+                <p class="mb-4">Chuyên cung cấp các sản phẩm mỹ phẩm chính hãng, chất lượng cao đến từ các thương hiệu nổi tiếng trong và ngoài nước.</p>
+                <div class="social-links mb-4">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-tiktok"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="footer-title">Liên kết nhanh</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Về chúng tôi</a></li>
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Chính sách đổi trả</a></li>
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Chính sách vận chuyển</a></li>
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Điều khoản dịch vụ</a></li>
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Chính sách bảo mật</a></li>
+                    <li><a href="#"><i class="bi bi-chevron-right me-1"></i> Hỏi đáp thường gặp</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="footer-title">Thông tin liên hệ</h4>
+                <ul class="footer-links">
+                    <li>
+                        <i class="bi bi-geo-alt me-2"></i>
+                        <span>123 Nguyễn Thị Minh Khai, Quận 1, TP.HCM</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone me-2"></i>
+                        <a href="tel:1900123456">1900 123 456</a>
+                    </li>
+                    <li>
+                        <i class="bi bi-envelope me-2"></i>
+                        <a href="mailto:contact@beautynest.vn">contact@beautynest.vn</a>
+                    </li>
+                    <li>
+                        <i class="bi bi-clock me-2"></i>
+                        <span>Thứ 2 - Chủ nhật: 9:00 - 21:00</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Newsletter -->
+            <div class="col-lg-3 col-md-6">
+                <h4 class="footer-title">Đăng ký nhận tin</h4>
+                <p class="mb-3">Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt.</p>
+                <form class="newsletter-form">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email của bạn" required>
+                        <button class="btn btn-primary btn-newsletter" type="submit">Đăng ký</button>
+                    </div>
+                </form>
+                <div class="mt-4">
+                    <h5 class="mb-3">Phương thức thanh toán</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <img src="/api/placeholder/40/25" alt="Visa" class="rounded">
+                        <img src="/api/placeholder/40/25" alt="Mastercard" class="rounded">
+                        <img src="/api/placeholder/40/25" alt="JCB" class="rounded">
+                        <img src="/api/placeholder/40/25" alt="Momo" class="rounded">
+                        <img src="/api/placeholder/40/25" alt="ZaloPay" class="rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4" style="background-color: var(--light-mint);">
+        
+        <!-- Copyright -->
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2025 BeautyNest. Tất cả quyền được bảo lưu.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="mb-0">Thiết kế bởi <a href="#" class="text-decoration-none" style="color: var(--mint);">Your Company</a></p>
+            </div>
+        </div>
+    </div>
+</div>
