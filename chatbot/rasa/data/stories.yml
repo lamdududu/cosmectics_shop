@@ -19,6 +19,7 @@ stories:
   - intent: search_product
     entities:
     - tag: "chống lão hóa"
+  - action: action_process_skin_type
   - action: action_search_products
   # - action: utter_search_results
   - action: action_listen

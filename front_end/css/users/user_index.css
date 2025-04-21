@@ -300,3 +300,49 @@ body {
     margin-left: 5px;
 }
 
+#searchDropdown {
+    width: 100%;         /* Hoặc bạn có thể dùng min-width nếu muốn co dãn linh hoạt */
+    max-width: 300px;    /* Tùy chọn: giới hạn chiều rộng tối đa */
+    left: auto;
+    right: 0;
+}
+
+
+#searchDropdown {
+    width: 100%;
+    max-width: 5000px;
+    left: 0;
+    right: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.product-dropdown-result {
+    padding: 8px 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.product-dropdown-result:hover {
+    background-color: #f8f9fa;
+}
+
+.product-dropdown-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.product-dropdown-name {
+    flex: 1;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+  

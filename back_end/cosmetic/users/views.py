@@ -32,7 +32,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             print('tokens', tokens)
 
             user = tokens.get('user')
-            redirect_url = '../admins/product_list.html' if user.is_staff else None
+            redirect_url = '../admins/dashboard.html' if user.is_staff else None
             
             if tokens.get('cart'):
                 return Response(
@@ -106,7 +106,13 @@ class UserViewSet(viewsets.ModelViewSet):
         if IsManager().has_permission(self.request, self):
             return super().get_object()
         
-        return user
+        return User.objects.filter(id=user.id).prefetch_related(
+                    Prefetch(
+                        'address_set', 
+                        queryset=Address.objects.filter(is_primary=True),
+                        to_attr='primary_address'    
+                    )
+                ).first()
     
 
     def update(self, request, *args, **kwargs):

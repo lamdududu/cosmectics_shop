@@ -13,7 +13,7 @@ nlu:
     - [Serum](category) giá [dưới 500 ngàn](price_range)
     - tìm [kem chống nắng](category) [từ 200 đến 500 nghìn](price_range)
     - có [serum](category) [The Ordinary](brand) không
-    - tôi đang cần một cây [son] (category)
+    - tôi đang cần một cây [son](category)
     - tìm kiếm [kem nền](category)
     - [Xịt khử mùi](category) [Nivea](brand)
 
@@ -23,13 +23,58 @@ nlu:
     - tôi đang tìm [kem dưỡng ẩm Emmie by Happy Skin](product_name)
     - tôi thích [La Roche Posay](brand)
     - giá khoảng [100 ngàn](price_range)
-    - tôi muốn [mặt nạ](category) dưỡng ẩm (tag)
-    - tôi cần [serum](category) cho [da mụn](tag)
+    - tôi muốn [mặt nạ](category) [dưỡng ẩm](tag:dưỡng ẩm)
+    - tôi cần [serum](category) cho [da mụn](tag:da mụn)
     - thương hiệu [Loreal](brand)
     - [dưới 500 ngàn](price_range)
     - [trên 300 nghìn](price_range)
-    - tôi quan tâm đến sản phẩm dành cho [da dầu](tag)
-    - tôi thích các sản phẩm [chống oxy hóa](tag)
-    - có sản phẩm dành cho [da khô](tag) không
-    - có (kem chống nắng)[category] dành cho [da mụn](tag) không
-    - tôi đang tìm sản phẩm [phục hồi](tag) da
+    - tôi quan tâm đến sản phẩm dành cho [da dầu](tag:da dầu)
+    - tôi thích các sản phẩm [chống oxy hóa](tag:chống oxy hóa)
+    - có sản phẩm dành cho [da khô](tag:da khô) không
+    - có [kem chống nắng](category) dành cho [da mụn](tag:da mụn) không
+    - tôi đang tìm sản phẩm [phục hồi](tag:phục hồi) da
+    - hãy giới thiệu cho tôi các sản phẩm [dưỡng ẩm](tag:dưỡng ẩm)
+    - cho tôi thông tin của một vài sản phẩm [trị mụn](tag:da mụn)
+    - tôi bị [nổi mụn](tag:da mụn), có sản phẩm nào phù hợp không?
+    - da tôi [nhờn](tag:da dầu), nên dùng loại nào?
+    - bạn có sản phẩm cho [da dễ kích ứng](tag:da nhạy cảm) không?
+    - da tôi bị [khô bong tróc](tag:da khô)
+
+- synonym: da dầu
+  examples: |
+    - da bị dầu
+    - da đổ dầu
+    - da nhờn
+    - da đổ nhiều dầu
+    - da dầu quá mức
+    - da dầu vùng chữ T
+    - da chảo dầu
+    - da tiết nhờn
+    - da nhiều bã nhờn
+    - da thiên dầu
+
+- synonym: da mụn
+  examples: |
+    - nổi mụn
+    - da bị mụn
+    - da nhiều mụn
+
+- synonym: da khô
+  examples: |
+    - da bị khô
+    - da thiếu ẩm
+    - da thiếu nước
+    - da khô quá mức
+    - da khô bong tróc
+    - da thiên khô
+
+- synonym: da nhạy cảm
+  examples: |
+    - da dễ kích ứng
+    - da mỏng
+    - da bong tróc
+    - da bị tổn thương
+
+- synonym: da hỗn hợp
+  examples: |
+    - da kết hợp

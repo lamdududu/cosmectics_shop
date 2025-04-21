@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiaoMiao</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/users/user_index.css" rel="stylesheet">
+    <link href="../../css/users/order_history.css" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+
+    </header>
+
+    <main class="container-fluid my-5 pt-5" style="min-height: 50vh">
+        <div class="container mt-4">
+            <h3 class="fw-bold">Lịch sử đơn hàng</h3>
+            
+            <div id="orderListContainer" class="order-history">
+                
+            </div>
+        </div>
+        <div id="loading-indicator" class="d-flex justify-content-center align-items-center loading-indicator mt-3">
+            <span>Đang tải...</span>
+            <div class="spinner"></div>
+        </div>
+    </main>
+    <footer id="footer">
+
+    </footer>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><strong>Danh sách sản phẩm</strong></h6>
+                    <table class="table table-responsive table-bordered">
+                        <tbody id="orderItemContainer">
+                            <!-- load cart item -->
+                        </tbody>
+                    </table>
+                    
+                    <h6><strong>Địa chỉ giao hàng: </strong></h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div id="nameAddressDisplay"></div>
+                            <div id="phoneAddressDisplay"></div>
+                            <div id="emailAddressDisplay" style="display: none;"></div>
+                            <div id="addressDisplay"></div>
+                        </div>
+                    </div>
+                    <hr>                 
+                    <div>
+                        <div class="d-flex align-items-center justify-content-start gap-3">
+                            <h6><strong>Mã giảm giá:</strong></h6>
+                        </div>
+                        <table class="table table-responsive table-bordered">
+                            <tbody id="couponContainer">
+                                <!-- load coupons -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    
+                    <h6><strong>Phương thức thanh toán</strong></h6>
+                    <div class="" id="paymentMethod"></div>
+                    <hr>
+                    
+                    <h6><strong>Tổng đơn hàng</strong></h6>
+                    <!-- <p>Tổng tiền: <strong id="totalAmount" class="total-amount"></strong></p> -->
+                    <p>Phí vận chuyển: <strong id="deliveryFee"></strong></p>
+                    <!-- <p>Giảm giá: <strong id="discountAmount"></strong></p> -->
+                    <p><b>Thành tiền: <span id="finalAmount"></span></b></p>
+
+                    <hr>
+                    <h6><strong>Trạng thái đơn hàng</strong></h6>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <span id="orderStatus"></span>
+                        <span id="updatedAt" style="color: rgb(141, 138, 138); font-size: 0.85rem;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/users/user_index.js"></script>
+    <script src="../../js/users/order_history.js"></script>
+    <script src="../../js/logout.js"></script>
+</body>
+</html>

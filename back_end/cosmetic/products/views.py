@@ -952,8 +952,8 @@ class SearchingViewSet(APIView):
             product_list = Product.objects.filter(
                 Q(name__icontains=product_info) |
                 Q(category__name__icontains=product_info) |
-                Q(materials__name__icontains=product_info) |
-                Q(tag__name__icontains=product_info)
+                Q(ingredients__name__icontains=product_info) |
+                Q(tags__name__icontains=product_info)
             ).filter(
                 Q(status=True) if not is_admin else Q()
             ).annotate(                     
@@ -982,6 +982,93 @@ class SearchingViewSet(APIView):
             
         return Response({"message": "Nothing found"}, status=status.HTTP_404_NOT_FOUND)
     
+
+
+class FilterProductViewSet(APIView):
+
+    pagination_class = CustomPagination
+
+    def post(self, request):
+
+        try:
+            paginator = self.pagination_class()
+        
+            brands = request.data.get('brands')
+            categories = request.data.get('categories')
+
+            filter = Q()
+
+            if brands is not None and len(brands) > 0:
+                for brand in brands:
+
+                    filter |= Q(brand__name=brand)
+            
+            if categories is not None and len(categories) > 0:
+                for category in categories:
+                    filter |= Q(category__name=category)
+            
+            today = make_aware(datetime.now())
+
+            # Subquery lấy min price hợp lệ
+            min_price_subquery = Price.objects.filter(
+                variant__product=OuterRef('id'),
+                start_date__lte=today
+            ).filter(
+                Q(end_date__gt=today) | Q(end_date__isnull=True)
+            ).order_by('price').values('price')[:1]     # lấy giá nhỏ nhất
+            
+            # Subquery lấy max discount hợp lệ
+            max_discount_subquery = Discount.objects.filter(
+                product=OuterRef('id'),
+                promotion__start_date__lte=today,
+                promotion__end_date__gte=today
+            ).order_by().values('percentage')[:1]
+            
+
+            products = Product.objects.filter(
+                filter & Q(status=True)
+            ).distinct().annotate(
+                min_price=Subquery(min_price_subquery),
+                discount_percentage=Subquery(max_discount_subquery),
+                first_image=Subquery(Image.objects.filter(product=OuterRef('id')).order_by('id').values('image_file')[:1])  # Lấy ảnh đầu tiên
+            ).order_by('-id')
+
+            # Áp dụng phân trang trước khi xử lý dữ liệu
+            # Nếu không có sẽ gây lỗi khi phân trang (dữ liệu không được tải đầy đủ)
+            # paginated_products = paginator.paginate_queryset(products, request)
+            # if paginated_products is None:
+            #     return Response([], status=status.HTTP_200_OK)
+
+            # Tính toán sale_price sau khi lấy từ DB
+            products_list = []
+            for product in products:
+                min_price = product.min_price
+                discount = product.discount_percentage
+                sale_price = min_price * (1-discount) if min_price and discount else None
+
+                image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
+
+
+                products_list.append({
+                    'id': product.id,
+                    'name': product.name,
+                    'brand': product.brand.name,
+                    'category': product.category.name,
+                    'price': min_price or 0,
+                    'sale_price': sale_price,
+                    'discount_percentage': discount,
+                    'image': image_url,
+                    'status': product.status,
+                })
+
+            # Trả về response có phân trang
+            # Nếu không sẽ chỉ có danh sách sản phẩm, không đúng định dạng mặc định của phân trang DRF            
+            # return paginator.get_paginated_response(products_list)
+            return Response(list(products_list), status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 class ProductInfoForChatbotViewSet(APIView):

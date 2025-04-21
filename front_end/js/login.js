@@ -75,6 +75,7 @@ async function login() {
         sessionStorage.setItem('refresh_token', data.refresh)
         sessionStorage.setItem('user', JSON.stringify(data.user))
         sessionStorage.setItem('cart_items', data.cart)
+        sessionStorage.setItem('username', data.user.username)
         
         if (data.redirect_url) {
             window.location.href = data.redirect_url

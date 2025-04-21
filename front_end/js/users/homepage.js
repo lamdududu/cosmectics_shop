@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const best_seller = await getProducts('page=1&page_size=4')
+    const best_seller = await getProducts('best_seller')
     renderProductList(best_seller, document.getElementById('bestSellers'))
 
 
-    const new_products = await getProducts('page=2&page_size=4')
+    const new_products = await getProducts('new')
     renderProductList(new_products, document.getElementById('newProducts'))
 })
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function getProducts(query) {
 
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/products/product_info/?${query}`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/orders/list_products/?query=${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ async function getProducts(query) {
 
         console.log(data)
 
-        return data.results
+        return data
         
     }
 

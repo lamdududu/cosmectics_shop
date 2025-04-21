@@ -20,10 +20,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     const navbarHTML = await loadHTMLContent('./components/navbar.txt')
     document.getElementById('navbar').innerHTML = navbarHTML
 
+    document.getElementById('usernameTopNav').innerHTML = sessionStorage.getItem('username')
+
     document.getElementById('sidebarCollapse').addEventListener('click', function() {
         document.getElementById('sidebar').classList.toggle('active');
         document.getElementById('content').classList.toggle('active');
     });
+
+    // Điều hướng đến trang danh sách tài khoản
+    // Trang tài khoản khách hàng
+    document.getElementById('customerNav').addEventListener('click', () => {
+        sessionStorage.setItem('accountType', 'customer'),
+        window.location.href = 'account_list.html'
+
+    })
+
+    // Trang tài khoản nhân viên
+    document.getElementById('staffNav').addEventListener('click', () => {
+        sessionStorage.setItem('accountType', 'staff'),
+        window.location.href = 'account_list.html'
+
+    })
 })
 
 
@@ -203,4 +220,54 @@ function addPage(currentPage, pagination, number, isActive = false, isDisabled =
     });
 
     pagination.appendChild(li);
+}
+
+//----------------------------------------------------------------
+// Khoá/mở khóa tài khoản
+//----------------------------------------------------------------
+
+
+async function toggleAccountStatus(row=null, accountId, is_active) {
+
+    try {
+        const access_token = await getValidAccessToken()
+        const response = await fetch(`http://127.0.0.1:8000/api/users/update_staff_account/${accountId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`
+            },
+            body: JSON.stringify({ 
+                user: {
+                    is_active: !is_active 
+                }
+            })
+        })
+
+        if (!response.ok) {
+            alert('Đã xảy ra lỗi trong quá trình khóa/mở khóa tài khoản.')
+            return
+        }
+
+        alert(!is_active ? 'Đã mở khóa tài khoản!' : 'Đã khóa tài khoản!')
+        
+        if (row) {
+            const btn = row.querySelector('.btn')
+
+            btn.innerHTML = `
+                <i class="bi bi-${!is_active ? 'unlock-fill' : 'lock-fill'}"></i>
+            `
+            btn.setAttribute('data-bs-title', !is_active ? 'Khoá tài khoản' : 'Mở khóa tài khoản')
+
+            row.cells[4].innerHTML = `
+                <span class="product-status ${!is_active ? 'status-instock' : 'status-outofstock'}">${!is_active ? 'Đang hoạt động' : 'Đã khóa'}</span>
+            `
+        }
+
+        // initTooltips()
+    }
+
+    catch (err) {
+        console.log(err)
+    }
 }

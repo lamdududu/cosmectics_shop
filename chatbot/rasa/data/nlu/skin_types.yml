@@ -1,0 +1,40 @@
+version: "3.1"
+nlu:
+  # - synonym: da dầu
+  #   examples: |
+  #     - da bị dầu
+  #     - da đổ dầu
+  #     - da nhờn
+  #     - da đổ nhiều dầu
+  #     - da dầu quá mức
+  #     - da dầu vùng chữ T
+  #     - da chảo dầu
+  #     - da tiết nhờn
+  #     - da nhiều bã nhờn
+  #     - da thiên dầu
+
+  # - synonym: da mụn
+  #   examples: |
+  #     - nổi mụn
+  #     - da bị mụn
+  #     - da nhiều mụn
+
+  # - synonym: da khô
+  #   examples: |
+  #     - da bị khô
+  #     - da thiếu ẩm
+  #     - da thiếu nước
+  #     - da khô quá mức
+  #     - da khô bong tróc
+  #     - da thiên khô
+
+  # - synonym: da nhạy cảm
+  #   examples: |
+  #     - da dễ kích ứng
+  #     - da mỏng
+  #     - da bong tróc
+  #     - da bị tổn thương
+
+  # - synonym: da hỗn hợp
+  #   examples: |
+  #     - da kết hợp

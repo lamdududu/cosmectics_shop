@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import CategoryViewSet, BrandViewSet, BatchViewSet, ProductViewSet, PriceViewSet, TagViewSet, IngredientViewSet
 from .views import ImageViewSet, VariantViewSet, ProductDetailViewSet, VariantDetailViewSet, BatchDetailViewSet
 from .views import CheckProductNameViewSet, CheckBatchNumberViewSet, CheckDateTimePriceViewSet, SearchingViewSet
-from .views import ProductInfoReadOnlyViewSet, BatchVariantViewSet, ProductInfoForChatbotViewSet, ProductSearchingForChatbot
+from .views import ProductInfoReadOnlyViewSet, BatchVariantViewSet, ProductInfoForChatbotViewSet, ProductSearchingForChatbot, FilterProductViewSet
 
 router = DefaultRouter() #trailing_slash=False
 router.register(r'categories', CategoryViewSet, basename='category')
@@ -34,6 +34,7 @@ urlpatterns = [
 
     # tìm kiếm sản phẩm theo tên, loại, văn hóa, số lô, khoảng giá
     path('searching/', SearchingViewSet.as_view(), name='search'),
+    path('filter/', FilterProductViewSet.as_view(), name='filter'),
 
     path('entities/', ProductInfoForChatbotViewSet.as_view(), name="entities"),
     path('chatbot_searching/', ProductSearchingForChatbot.as_view(), name="chatbot_searching")

@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand" href="#">MiaoMiao</a>
+            <a class="navbar-brand" href="./index.html">MiaoMiao</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                        <a class="nav-link active" aria-current="page" href="./index.html">Trang chủ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,12 +35,16 @@
                 
                 <div id="rightNav" class="d-flex align-items-center ms-auto">
                     <!-- Search Box -->
-                    <div class="search-box d-flex align-items-center me-3 px-3">
-                        <input class="form-control form-control-sm border-0 me-2 search-input" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                    <div class="search-box d-flex align-items-center me-3 px-3 position-relative">
+                        <input class="form-control form-control-sm border-0 me-2 search-input " type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                       
                         <button class="search-button" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
+                        <div id="searchDropdown" class="dropdown-menu shadow" style="position: absolute; top: 100%; left: 0; right: 0; z-index: 1000; display: none;"></div>
                     </div>
+                     
+
 
                 </div>
             </div>

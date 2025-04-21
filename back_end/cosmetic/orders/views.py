@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.db.models.expressions import Func, Value
 from django.db import transaction
-from django.db.models import Q, OuterRef, JSONField, F, Subquery, Sum
+from django.db.models import Q, OuterRef, JSONField, F, Subquery, Sum, Count
 from django.db.models.functions import ExtractWeek, ExtractYear, ExtractDay, ExtractMonth
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
@@ -295,7 +295,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         if IsAdmin().has_permission(self.request, []):
             return super().get_queryset()
         
-        return Order.objects.filter(user=self.request.user)
+        return Order.objects.filter(user=self.request.user).order_by('-id')
     
 
     def get_object(self):
@@ -648,7 +648,7 @@ class OrderStatusUpdatingViewSet(APIView):
 
             print(order_status)
 
-            if order_status.status.id == 5:
+            if order_status.status.id == 6:
                 order.is_paid = True
                 order.save()
             
@@ -795,106 +795,181 @@ class RevenueView(APIView):
         return total_amount
     
 
+class OrderStatisticsView(APIView):
+    def get(self, request):
+        try:
+            today = make_aware(datetime.now())
+            year = int(request.GET.get('year', today.year))
+
+            order_stats = (
+                Order.objects
+                .filter(order_date__year=year)
+                .annotate(month=ExtractMonth('order_date'))
+                .values('month')
+                .annotate(order_count=Count('id'))
+                .order_by('month')
+            )
+
+            result = {item['month']: item['order_count'] for item in order_stats}
+
+            return Response(result, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({'message': 'Have an error', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+class BestsellerProductsView(APIView):
+    def get(self, request):
+        try:
+            # Subquery lấy ảnh đầu tiên
+            first_image_subquery = Image.objects.filter(
+                product=OuterRef('id')
+            ).order_by('id').values('image_file')[:1]
+
+            bestseller_stats = (
+                OrderItem.objects.values("variant__product")
+                .annotate(total_sold=Sum("quantity"))
+                .order_by("-total_sold")[:5]
+            )
+
+            # Tạo dict ánh xạ product_id -> total_sold
+            total_sold_map = {
+                item["variant__product"]: item["total_sold"]
+                for item in bestseller_stats
+            }
+
+            bestseller_product_ids = list(total_sold_map.keys())
+
+            # Truy vấn sản phẩm
+            bestseller_products = Product.objects.filter(
+                id__in=bestseller_product_ids, status=True
+            ).annotate(
+                first_image=Subquery(first_image_subquery)
+            )
+
+            product_map = {product.id: product for product in bestseller_products}
+
+            # Tạo list đúng thứ tự
+            bestseller_list = []
+            for pid in bestseller_product_ids:
+                product = product_map.get(pid)
+                if product:
+                    image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
+                    bestseller_list.append({
+                        'id': product.id,
+                        'name': product.name,
+                        'total_sold': total_sold_map.get(product.id, 0),
+                        'image': image_url,
+                    })
+
+            return Response(list(bestseller_list), status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
 
 
 class ListProductView(APIView):
    
     def get(self, request):
         
-        query = request.GET.get('query')
+        try:
+            query = request.GET.get('query')
 
-        if not query:
-            return Response('No query', status=status.HTTP_400_BAD_REQUEST)
+            if not query:
+                return Response('No query', status=status.HTTP_400_BAD_REQUEST)
 
 
-        today = make_aware(datetime.now())
+            today = make_aware(datetime.now())
 
-        # Subquery lấy giá thấp nhất của sản phẩm
-        min_price_subquery = Price.objects.filter(
-            variant__product=OuterRef('id'),
-            start_date__lte=today
-        ).filter(
-            Q(end_date__gt=today) | Q(end_date__isnull=True)
-        ).order_by('price').values('price')[:1]  # Lấy giá thấp nhất
+            # Subquery lấy giá thấp nhất của sản phẩm
+            min_price_subquery = Price.objects.filter(
+                variant__product=OuterRef('id'),
+                start_date__lte=today
+            ).filter(
+                Q(end_date__gt=today) | Q(end_date__isnull=True)
+            ).order_by('price').values('price')[:1]  # Lấy giá thấp nhất
 
-        # Subquery lấy giảm giá cao nhất của sản phẩm
-        max_discount_subquery = Discount.objects.filter(
-            product=OuterRef('id'),
-            promotion__start_date__lte=today,
-            promotion__end_date__gte=today
-        ).order_by('-percentage').values('percentage')[:1]  # Lấy giảm giá cao nhất
+            # Subquery lấy giảm giá cao nhất của sản phẩm
+            max_discount_subquery = Discount.objects.filter(
+                product=OuterRef('id'),
+                promotion__start_date__lte=today,
+                promotion__end_date__gte=today
+            ).order_by('-percentage').values('percentage')[:1]  # Lấy giảm giá cao nhất
 
-        # Subquery lấy ảnh đầu tiên của sản phẩm
-        first_image_subquery = Image.objects.filter(
-            product=OuterRef('id')
-        ).order_by('id').values('image_file')[:1]  # Lấy ảnh đầu tiên
+            # Subquery lấy ảnh đầu tiên của sản phẩm
+            first_image_subquery = Image.objects.filter(
+                product=OuterRef('id')
+            ).order_by('id').values('image_file')[:1]  # Lấy ảnh đầu tiên
 
-        if query == 'best_seller':
+            if query == 'best_seller':
 
-            # Truy vấn lấy danh sách sản phẩm bán chạy
-            bestseller_product_ids = OrderItem.objects.values(
-                "variant__product"       # Nhóm theo sản phẩm
-                ) .annotate(
-                    total_sold=Sum("quantity")      # Tính tổng số lượng đã bán
-                ).order_by("-total_sold")[:8].values_list('variant__product', flat=True)  # Sắp xếp giảm dần
+                # Truy vấn lấy danh sách sản phẩm bán chạy
+                bestseller_product_ids = OrderItem.objects.values(
+                    "variant__product"       # Nhóm theo sản phẩm
+                    ) .annotate(
+                        total_sold=Sum("quantity")      # Tính tổng số lượng đã bán
+                    ).order_by("-total_sold")[:8].values_list('variant__product', flat=True)  # Sắp xếp giảm dần
+                
+
+                # Truy vấn lấy thông tin sản phẩm bán chạy + giá + giảm giá + ảnh
+                bestseller_products = Product.objects.filter(
+                    id__in=bestseller_product_ids, status=True
+                ).annotate(
+                    min_price=Subquery(min_price_subquery),
+                    discount_percentage=Subquery(max_discount_subquery),
+                    first_image=Subquery(first_image_subquery)
+                ).order_by('-id')  # Giữ thứ tự theo ID sản phẩm
+
+                bestseller_list = []
+                for product in bestseller_products:
+                    min_price = product.min_price
+                    discount = product.discount_percentage
+                    sale_price = min_price * (1-discount) if min_price and discount else None
+
+                    image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
+
+
+                    bestseller_list.append({
+                        'id': product.id,
+                        'name': product.name,
+                        'price': min_price or 0,
+                        'sale_price': sale_price,
+                        'discount_percentage': discount,
+                        'image': image_url,
+                    })
+
+                return Response(list(bestseller_list), status=status.HTTP_200_OK)
             
 
-            # Truy vấn lấy thông tin sản phẩm bán chạy + giá + giảm giá + ảnh
-            bestseller_products = Product.objects.filter(
-                id__in=bestseller_product_ids, status=True
-            ).annotate(
-                min_price=Subquery(min_price_subquery),
-                discount_percentage=Subquery(max_discount_subquery),
-                first_image=Subquery(first_image_subquery)
-            ).order_by('-id')  # Giữ thứ tự theo ID sản phẩm
+            if query == 'new':
 
-            bestseller_list = []
-            for product in bestseller_products:
-                min_price = product.min_price
-                discount = product.discount_percentage
-                sale_price = min_price * (1-discount) if min_price and discount else None
+                new_product = Product.objects.filter(
+                    status=True
+                ).annotate(
+                    min_price=Subquery(min_price_subquery),
+                    discount_percentage=Subquery(max_discount_subquery),
+                    first_image=Subquery(first_image_subquery)
+                ).order_by('-id')[:8]
 
-                image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
+                new_list = []
+                for product in new_product:
+                    min_price = product.min_price
+                    discount = product.discount_percentage
+                    sale_price = min_price * (1-discount) if min_price and discount else None
 
-
-                bestseller_list.append({
-                    'id': product.id,
-                    'name': product.name,
-                    'price': min_price or 0,
-                    'sale_price': sale_price,
-                    'discount_percentage': discount,
-                    'image': image_url,
-                })
-
-            return Response(list(bestseller_list), status=status.HTTP_200_OK)
-        
-
-        if query == 'new':
-
-            new_product = Product.objects.filter(
-                status=True
-            ).annotate(
-                min_price=Subquery(min_price_subquery),
-                discount_percentage=Subquery(max_discount_subquery),
-                first_image=Subquery(first_image_subquery)
-            ).order_by('-id')[:8]
-
-            new_list = []
-            for product in new_product:
-                min_price = product.min_price
-                discount = product.discount_percentage
-                sale_price = min_price * (1-discount) if min_price and discount else None
-
-                image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
+                    image_url = request.build_absolute_uri(settings.MEDIA_URL + product.first_image) if product.first_image else None
 
 
-                new_list.append({
-                    'id': product.id,
-                    'name': product.name,
-                    'price': min_price or 0,
-                    'sale_price': sale_price,
-                    'discount_percentage': discount,
-                    'image': image_url,
-                })
+                    new_list.append({
+                        'id': product.id,
+                        'name': product.name,
+                        'price': min_price or 0,
+                        'sale_price': sale_price,
+                        'discount_percentage': discount,
+                        'image': image_url,
+                    })
 
-            return Response(list(new_list), status=status.HTTP_200_OK)
+                return Response(list(new_list), status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

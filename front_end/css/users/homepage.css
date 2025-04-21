@@ -28,3 +28,12 @@
     max-width: 600px;
     max-height: 400px;
 }
+
+
+#brandContainer.collapsed .form-check:nth-child(n+6) {
+    display: none;
+}
+
+#categoryContainer.collapsed .form-check:nth-child(n+6) {
+    display: none;
+}

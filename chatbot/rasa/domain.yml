@@ -21,6 +21,7 @@ entities:
 
 slots:
   # Original slots
+  # Không cần khai báo entities cho các slot này vì custom action dùng SlotSet(...) để lưu dữ liệu
   categories_mapping:
     type: any
     influence_conversation: false
@@ -51,7 +52,6 @@ slots:
     mappings:
     - type: custom
   
-  # Missing slots
   categories:
     type: list
     influence_conversation: false
@@ -133,6 +133,28 @@ responses:
 
   utter_search_results:
     - text: "Tôi đã tìm thấy những sản phẩm sau: {search_results}"
+  
+  utter_skin_tag_oily:
+    - text: "Da dầu nên tránh các sản phẩm chứa dầu và nên ưu tiên dùng sản phẩm không gây bít tắc lỗ chân lông (non-comedogenic).
+            Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
+
+  utter_skin_tag_dry:
+    - text: "Da khô cần được dưỡng ẩm kỹ lưỡng, hãy chọn các sản phẩm có chứa hyaluronic acid hoặc glycerin để giữ ẩm.
+            Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
+
+  utter_skin_tag_acne:
+    - text: "Da mụn cần sản phẩm dịu nhẹ, tránh các sản phẩm chứa cồn hoặc hương liệu mạnh. Nên ưu tiên sản phẩm có thành phần như salicylic acid hoặc niacinamide.
+            Tôi gợi ý cho bạn sản phẩm sau: {search_results}
+            "
+
+  utter_skin_tag_sensitive:
+    - text: "Da nhạy cảm cần tránh sản phẩm chứa hương liệu và cồn. Ưu tiên sản phẩm có thành phần làm dịu như chiết xuất cúc la mã, trà xanh hoặc centella asiatica.
+            Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
+  
+
+  utter_skin_tag_combination:
+    - text: "Da hỗn hợp cần chăm sóc linh hoạt, nên dùng các sản phẩm nhẹ dịu, kiểm soát dầu vùng chữ T và dưỡng ẩm vùng da khô.
+            Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
 
   utter_no_results:
     - text: "Xin lỗi, tôi không tìm thấy sản phẩm nào phù hợp với yêu cầu của bạn."
@@ -150,6 +172,7 @@ responses:
 actions:
 - action_session_start
 - action_fetch_entities
+- action_process_skin_type
 - action_search_products
 - action_restart_session
 

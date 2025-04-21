@@ -3,7 +3,7 @@
         <div class="row g-4">
             <!-- Logo and About -->
             <div class="col-lg-3 col-md-6">
-                <a class="footer-logo d-inline-block h4 mb-4" href="#">BeautyNest</a>
+                <a class="footer-logo d-inline-block h4 mb-4" href="#">MiaoMiao</a>
                 <p class="mb-4">Chuyên cung cấp các sản phẩm mỹ phẩm chính hãng, chất lượng cao đến từ các thương hiệu nổi tiếng trong và ngoài nước.</p>
                 <div class="social-links mb-4">
                     <a href="#"><i class="bi bi-facebook"></i></a>
@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <i class="bi bi-envelope me-2"></i>
-                        <a href="mailto:contact@beautynest.vn">contact@beautynest.vn</a>
+                        <a href="mailto:contact@beautynest.vn">contact@miaomiao.vn</a>
                     </li>
                     <li>
                         <i class="bi bi-clock me-2"></i>
@@ -77,7 +77,7 @@
         <!-- Copyright -->
         <div class="row">
             <div class="col-md-6">
-                <p class="mb-0">&copy; 2025 BeautyNest. Tất cả quyền được bảo lưu.</p>
+                <p class="mb-0">&copy; 2025 MiaoMiao. Tất cả quyền được bảo lưu.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <p class="mb-0">Thiết kế bởi <a href="#" class="text-decoration-none" style="color: var(--mint);">Your Company</a></p>

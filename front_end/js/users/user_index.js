@@ -65,11 +65,11 @@ async function loadHeader() {
             <!-- User Dropdown -->
             <div class="user-dropdown dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
+                    <i class="bi bi-person-circle"></i> ${sessionStorage.getItem('username')}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="#">Tài khoản của tôi</a></li>
-                    <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                    <li><a class="dropdown-item" href="./personal_info.html">Tài khoản của tôi</a></li>
+                    <li><a class="dropdown-item" href="./order_history.html">Đơn hàng</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a onclick="logout()" class="dropdown-item" href="#">Đăng xuất</a></li>
                 </ul>
@@ -78,6 +78,74 @@ async function loadHeader() {
 
         navbar.insertAdjacentHTML('beforeend', navForAccount)
     }
+
+    const searchInput = document.querySelector('.search-input');
+    const dropdown = document.getElementById('searchDropdown');
+
+    function debounce(func, delay) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    const fetchSearchResults = debounce(async function () {
+        const keyword = searchInput.value.trim();
+
+        if (!keyword) {
+            dropdown.style.display = 'none';
+            dropdown.innerHTML = '';
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/products/searching/?query=${keyword}`);
+            const data = await response.json();
+
+            if (data.results.length === 0) {
+                dropdown.innerHTML = '<div class="dropdown-item text-muted">Không tìm thấy</div>';
+            } else {
+                const dropdown = document.getElementById('searchDropdown');
+                dropdown.innerHTML = '';
+                data.results.forEach(item => {
+
+                    const a = document.createElement('a')
+
+                    a.classList.add("dropdown-item", "d-flex", "align-items-center", "product-dropdown-result")
+
+                    a.innerHTML = `
+                        <img src="http://127.0.0.1:8000/media/${item.first_image}" alt="${item.name}" class="me-2 product-dropdown-img">
+                        <span class="product-dropdown-name">${item.name}</span>
+                    `;
+
+                    a.href='#'
+
+                    a.onclick = () => {
+                        sessionStorage.setItem('product_id', item.id)
+                        window.location.href = `./product_detail.html?name=${item.name}`
+                    }
+
+                    dropdown.appendChild(a)
+                });
+                dropdown.style.display = 'block';
+            }
+
+            dropdown.style.display = 'block';
+        } catch (error) {
+            console.error('Lỗi tìm kiếm:', error);
+        }
+    }, 300);
+
+    searchInput.addEventListener('input', fetchSearchResults);
+
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
 }
 
 

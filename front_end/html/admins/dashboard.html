@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyNest Admin Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/admins/admin_index.css">
+    <link rel="stylesheet" href="../../css/admins/product_list.css">
+    <link rel="stylesheet" href="../../css/admins/batch_list.css">
+    <style>
+        :root {
+            --mint: #a3e4d7;
+            --light-mint: #d1f2eb;
+            --dark-mint: #72c7b9;
+            --peach: #fadbd8;
+            --lavender: #e8daef;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-color: #eaeaea;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background-color: var(--light-mint);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-brand {
+            color: var(--dark-mint);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--light-mint);
+            color: var(--dark-mint);
+        }
+        
+        .nav-link.active {
+            background-color: var(--mint);
+            color: white;
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .navbar-toggler {
+            padding: 8px;
+            border: none;
+            background-color: var(--light-mint);
+            border-radius: 5px;
+        }
+        
+        .user-dropdown .dropdown-toggle::after {
+            display: none;
+        }
+        
+        .user-dropdown .dropdown-menu {
+            right: 0;
+            left: auto;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .page-title {
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Cards */
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            border-left: 4px solid;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-sales {
+            border-left-color: #4caf50;
+        }
+        
+        .card-orders {
+            border-left-color: #2196f3;
+        }
+        
+        .card-users {
+            border-left-color: #9c27b0;
+        }
+        
+        .card-products {
+            border-left-color: #ff9800;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .icon-sales {
+            background-color: #4caf50;
+        }
+        
+        .icon-orders {
+            background-color: #2196f3;
+        }
+        
+        .icon-users {
+            background-color: #9c27b0;
+        }
+        
+        .icon-products {
+            background-color: #ff9800;
+        }
+        
+        .card-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 10px 0 5px;
+        }
+        
+        .card-label {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        /* Tables */
+        .table-wrapper {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .table th {
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom-width: 1px;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .table-status {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background-color: #e3f2fd;
+            color: #2196f3;
+        }
+        
+        .status-pending {
+            background-color: #fff8e1;
+            color: #ff9800;
+        }
+        
+        .status-processing {
+            background-color: #e8f5e9;
+            color: #4caf50;
+        }
+        
+        .status-cancelled {
+            background-color: #ffebee;
+            color: #f44336;
+        }
+        
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                margin-left: -250px;
+            }
+            .sidebar.active {
+                margin-left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .main-content.active {
+                margin-left: 250px;
+            }
+        }
+        
+        /* Toggle Button */
+        #sidebarCollapse {
+            background-color: var(--light-mint);
+            border: none;
+            color: var(--dark-mint);
+        }
+        
+        /* Badges */
+        .badge-counter {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 50%;
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        /* Charts */
+        .chart-wrapper {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* Profile */
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: var(--light-mint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-mint);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+    </div>
+    <!-- <main class="main-content"> -->
+        
+        
+
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <!-- Top Navigation -->
+        <nav id="navbar">
+
+        </nav>
+        
+        <!-- Dashboard Content -->
+        <div class="container-fluid">
+            <h1 class="page-title">Dashboard</h1>
+            
+            <!-- Stats Cards -->
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="dashboard-card card-sales">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 id="thisMonthRevenue" class="card-value"></h5>
+                                    <p class="card-label">Doanh thu tháng này</p>
+                                </div>
+                                <div class="card-icon icon-sales">
+                                    <i class="bi bi-wallet2"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <span id="percentageThisMonthRevenue"></span>
+                                <span class="text-muted ms-2">so với tháng trước</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="dashboard-card card-orders">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 id="orderThisMonth" class="card-value"></h5>
+                                    <p class="card-label">Đơn hàng tháng này</p>
+                                </div>
+                                <div class="card-icon icon-orders">
+                                    <i class="bi bi-box"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <span id="percentageThisMonthOrder"></span>
+                                <span class="text-muted ms-2">so với tháng trước</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 justify-content-center align-items-center">
+                    <div class="chart-item">
+                        <canvas id="monthChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- <div class="col-lg-3 col-md-6">
+                    <div class="dashboard-card card-users">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-value">52</h5>
+                                <p class="card-label">Khách hàng mới</p>
+                            </div>
+                            <div class="card-icon icon-users">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-success"><i class="bi bi-arrow-up"></i> 15.7%</span>
+                            <span class="text-muted ms-2">so với tháng trước</span>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- <div class="col-lg-3 col-md-6">
+                    <div class="dashboard-card card-products">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-value">285</h5>
+                                <p class="card-label">Sản phẩm trong kho</p>
+                            </div>
+                            <div class="card-icon icon-products">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-danger"><i class="bi bi-arrow-down"></i> 3.2%</span>
+                            <span class="text-muted ms-2">so với tháng trước</span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            
+            <!-- Charts -->
+            <div class="row mb-5 justify-content-start align-items-center">
+                <div class="col-lg-5 dashboard-card card-users me-lg-5">
+                    <div class="chart-item">
+                        <canvas id="weekChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-5 dashboard-card card-products">
+                    <div class="chart-item">
+                        <canvas id="dayChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-wrapper">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Đơn hàng gần đây</h5>
+                            <a href="./order_list.html" class="btn btn-sm" style="background-color: var(--light-mint); color: var(--dark-mint);">Xem tất cả</a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Khách hàng</th>
+                                        <th class="text-center">Ngày đặt hàng</th>
+                                        <th class="text-center">Thành tiền</th>
+                                        <th class="text-center">Phương thức thanh toán</th>
+                                        <th class="text-center">Trạng thái thanh toán</th>
+                                        <th class="text-center">Trạng thái đơn hàng</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orderContainer">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products and Customers -->
+            <div class="row">
+                <!-- Top Products -->
+                <div class="col-lg">
+                    <div class="table-wrapper">
+                        <h5 class="mb-4">Sản phẩm bán chạy</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Đã bán</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productContainer">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Customers -->
+                <!-- <div class="col-lg-6">
+                    <div class="table-wrapper">
+                        <h5 class="mb-4">Khách hàng mới</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Khách hàng</th>
+                                        <th scope="col">Đăng ký</th>
+                                        <th scope="col">Đơn hàng</th>
+                                        <th scope="col">Chi tiêu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-2">
+                                                    <span>N</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0 fw-medium">Nguyễn Văn An</p>
+                                                    <small class="text-muted">an@example.com</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>05/04/2025</td>
+                                        <td>2</td>
+                                        <td>1.2 triệu đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-2">
+                                                    <span>T</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0 fw-medium">Trần Thị Bình</p>
+                                                    <small class="text-muted">binh@example.com</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>04/04/2025</td>
+                                        <td>1</td>
+                                        <td>650.000 đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-2">
+                                                    <span>L</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0 fw-medium">Lê Hoàng Cường</p>
+                                                    <small class="text-muted">cuong@example.com</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>03/04/2025</td>
+                                        <td>3</td>
+                                        <td>1.8 triệu đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-2">
+                                                    <span>P</span>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0 fw-medium">Phạm Minh Dương</p>
+                                                    <small class="text-muted">duong@example.com</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>02/04/2025</td>
+                                        <td>1</td>
+                                        <td>420.000 đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/dashboard.js"></script>
+</body>
+</html>

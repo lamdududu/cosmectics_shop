@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyNest Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/admins/admin_index.css" rel="stylesheet">
+    <link href="../../css/admins/product_detail.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="content">
+        <!-- Top Navigation -->
+        <div id="navbar">
+
+        </div>
+        
+        <!-- Form Content -->
+        <div class="container-fluid">
+            <h2 class="page-title">Thông tin đơn hàng</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-wrapper">
+                        <div id="orderForm" class="needs-validation" novalidate>
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-end">
+                                    <button id="updateStatusBtn" type="submit" class="btn btn-primary px-3 py-2" data-action="">Cập nhật trạng thái</button>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="username">Tài khoản đặt hàng:</label>
+                                        <input class="form-control custom-input" type="text" id="username" name="username" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="reciverName">Tên người nhận:</label>
+                                        <input id="reciverName" class="form-control custom-input" type="text" name="reciverName" disabled>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="phoneNumber">Số điện thoại:</label>
+                                        <input class="form-control custom-input" type="text" id="phoneNumber" name="phoneNumber" disabled>
+                                    </div>
+                                </div>   
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="email">Địa chỉ email:</label>
+                                        <input id="email" class="form-control custom-input" type="text" name="email" disabled>  
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="mb-4">
+                                <label for="address">Địa chỉ giao hàng:</label>
+                                <input class="form-control custom-input" type="text" id="address" name="address" disabled>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="orderDate">Ngày đặt hàng:</label>
+                                        <input class="form-control custom-input" type="text" id="orderDate" name="orderDate" disabled>
+                                    </div>
+                                </div>   
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="totalAmount">Thành tiền:</label>
+                                        <input id="totalAmount" class="form-control custom-input" type="text" name="totalAmount" disabled>    
+                                    </div>
+                                </div> 
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="deliveryFee">Phí vận chuyển:</label>
+                                        <input id="deliveryFee" class="form-control custom-input" type="text" name="deliveryFee" disabled>     
+                                    </div>
+                                </div>               
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="paymentMethod">Phương thức thanh toán:</label>
+                                        <input class="form-control custom-input" type="text" id="paymentMethod" name="paymentMethod" disabled>
+                                    </div>
+                                </div>   
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="paymentStatus">Trạng thái thanh toán:</label>
+                                        <input id="paymentStatus" class="form-control custom-input" type="text" name="paymentStatus" disabled>      
+                                    </div>
+                                </div>            
+                            </div>
+                            <div class="mb-4">
+                                <label>Mã giảm giá:</label>
+                                <table class="table table-bordered table-responsive">
+                                    <tbody id="coupons">
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div div class="mb-4">
+                                <h5>Danh sách sản phẩm</h5>
+                                <table class="table table-bordered table-responsive table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center align-middle">STT</th>
+                                            <th class="text-center align-middle">Tên sản phẩm</th>
+                                            <th class="text-center align-middle">Phân loại</th>
+                                            <th class="text-center align-middle">Giá bán</th>
+                                            <th class="text-center align-middle">Tổng giá</th>
+                                            <th class="text-center align-middle">Số lượng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orderItems"></tbody>
+                                </table>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5>Trạng thái đơn hàng</h5>
+                                <table class="table table-bordered table-responsive table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center align-middle">STT</th>
+                                            <th class="text-center align-middle">Trạng thái</th>
+                                            <th class="text-center align-middle">Ngày cập nhật</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orderStatus"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="updateStatusForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statusModalLabel">Cập nhật trạng thái</h5>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        Trạng thái đơn hàng hiện tại là: <b id="nowStatusOrder"></b>
+                    </div>
+                    <div>
+                        <select id="statusSelector" class="form-select">
+                            <option value="">Chọn trạng thái</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center align-items-center">
+                    <button type="sumbit" class="btn btn-primary">Cập nhật</button>
+                    <button type="button" class="btn btn-sub" data-bs-dismiss="modal">Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <section class="modal fade" id="warningPriceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningPriceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header warning">
+                    <h5 class="modal-title" id="warningPriceModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <span id="price-warning-message">
+        
+                    </span>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" id="confirmSavingBtn" class="btn btn-primary">Có, tôi chắc chắn lưu</button>
+                    <button type="button" id="confirmEditingBtn" class="btn btn-warning">Không, tôi cần chỉnh sửa</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+   
+
+    <section id="additional-modal-section">
+
+    </section>
+    <section class="modal fade" id="warning-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="warningModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="warning-message">
+                        Nếu tiếp tục, các chỉnh sửa sẽ không được lưu. Bạn có muốn ở lại trang không?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="keep-page-btn" class="btn btn-content" data-bs-dismiss="modal">Ở lại</button>
+                    <button type="button" id="confirm-exit-btn" class="btn btn-danger">Rời đi</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/orders/order_detail.js"></script>
+</body>
+</html>

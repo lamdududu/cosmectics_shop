@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyNest Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../../css/index.css" rel="stylesheet">
+    <link href="../../css/admins/admin_index.css" rel="stylesheet">
+    <link href="../../css/admins/product_detail.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="content">
+        <!-- Top Navigation -->
+        <div id="navbar">
+
+        </div>
+        
+        <!-- Form Content -->
+        <div class="container-fluid">
+            <h2 class="page-title">Thông tin tài khoản</h2>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-wrapper">
+                        <form id="changePersonalInfoForm" class="needs-validation" novalidate>
+                            <div class="row mb-4">
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary" data-action="">Lưu thông tin</button>
+                                </div>    
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="username">Tên đăng nhập:</label>
+                                        <input type="text" id="username" name="username" placeholder="user123..." class="form-control custom-input" disabled>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập tên đăng nhập
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" placeholder="example123@example.com" class="form-control custom-input" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập email
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="phoneNumber">Số điện thoại :</label>
+                                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="0123456789" class="form-control custom-input" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập số điện thoại
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="lastname">Họ :</label>
+                                        <input type="text" id="lastname" name="lastname" placeholder="Nguyen..." class="form-control custom-input" required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập họ
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="firstname">Tên:</label>
+                                        <input type="text" id="firstname" name="firstname" placeholder="An..." class="form-control custom-input" required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập tên
+                                        </div>
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <div for="province">Tỉnh/Thành:</div>
+                                        <select id="province" name="province" class="form-select" required>
+                                            <option value="-99999" selected disabled>Chọn tỉnh/thành phố TW</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Vui lòng chọn tỉnh/thành phố
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div for="district">Huyện/Quận/Thành:</div>
+                                    <select id="district" name="district" class="form-select" required>
+                                        <option value="-99999" selected disabled>Chọn huyện/quận/thành</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Vui lòng chọn huyện/quận/thành phố
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div for="ward">Xã/Phường/Thị trấn:</div>
+                                    <select id="ward" name="ward" class="form-select" required>
+                                        <option value="-99999" selected disabled>Chọn xã/phường/thị trấn</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Vui lòng chọn xã/phường/thị trấn
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="detailAddress">Số nhà/Văn phòng/Tòa nhà/Tầng :</label>
+                                <input type="text" id="detailAddress" name="detailAddress" placeholder="Số 123, tòa nhà A, đường B.../ấp C... " class="form-control custom-input">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div id="date" class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="lastLogin">Đăng nhập lần cuối :</label>
+                                        <input type="text" id="lastLogin" name="lastLogin" placeholder="Nguyen..." class="form-control custom-input" disabled>
+                                    </div>
+                                </div>   
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="dateJoined">Ngày tạo tài khoản:</label>
+                                        <input type="text" id="dateJoined" name="dateJoined" placeholder="An..." class="form-control custom-input" disabled>
+                                    </div>
+                                </div>               
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <h2 class="page-title">Đổi mật khẩu</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-wrapper">
+                        <form id="changePasswordForm" class="needs-validation" novalidate>
+                            <div class="mb-4">
+                                <label for="oldPassword">Mật khẩu hiện tại:</label>
+                                <input type="password" id="oldPassword" name="oldPassword" placeholder="asI!@njhaGU12..." class="form-control custom-input" required>
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập mật khẩu hiện tại
+                                </div>
+                            </div>
+                            <div id="passwordContainer" class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="password">Mật khẩu:</label>
+                                        <input type="password" id="password" name="password" placeholder="asI!@njhaGU12..." class="form-control custom-input" required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng nhập mật khẩu
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="confirmPassword">Xác nhận mật khẩu:</label>
+                                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="asI!@njhaGU12..." class="form-control custom-input" required>
+                                        <div class="invalid-feedback">
+                                            Vui lòng xác nhận mật khẩu
+                                        </div>
+                                    </div>
+                                </div>               
+                            </div>
+                        
+                            
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary" data-action="">
+                                    <div class="d-flex justify-content-center align-items-center gap-1">
+                                        <span id="loading-indicator-btn" class="loading-indicator-btn" style="padding: 0 10px;">
+                                            <span class="spinner-btn"></span>
+                                        </span>
+                                        <span>Đổi mật khẩu</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <section class="modal fade" id="warning-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="warningModalLabel">Cảnh báo</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="warning-message">
+                        Nếu tiếp tục, các chỉnh sửa sẽ không được lưu. Bạn có muốn ở lại trang không?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="keep-page-btn" class="btn btn-content" data-bs-dismiss="modal">Ở lại</button>
+                    <button type="button" id="confirm-exit-btn" class="btn btn-danger">Rời đi</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../../js/index.js"></script>
+    <script src="../../js/logout.js"></script>
+    <script src="../../js/external_address_api.js"></script>
+    <script src="../../js/admins/admin_index.js"></script>
+    <script src="../../js/admins/accounts/personal_info.js"></script>
+</body>
+</html>

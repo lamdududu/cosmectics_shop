@@ -93,13 +93,6 @@ body {
     border-radius: 10px;
 }
 
-.page-title {
-    font-weight: 600;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-}
-
 /* Cards */
 .dashboard-card {
     background-color: white;
@@ -324,34 +317,6 @@ body {
 
 textarea.form-control {
     min-height: 400px;
-}
-
-.product-status {
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-block;
-}
-
-.status-instock {
-    background-color: #e8f5e9;
-    color: #4caf50;
-}
-
-.status-lowstock {
-    background-color: #fff8e1;
-    color: #ff9800;
-}
-
-.status-outofstock {
-    background-color: #ffebee;
-    color: #f44336;
-}
-
-.status-draft {
-    background-color: var(--lavender);
-    color: #9c27b0;
 }
 
 
