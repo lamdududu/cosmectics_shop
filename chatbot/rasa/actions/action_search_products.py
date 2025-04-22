@@ -65,6 +65,8 @@ class ActionSearchProducts(Action):
             price = product.get("sale_price") or product.get("price", 0)
 
             # So khớp fuzzy
+            # nếu không có input của user, thì điều kiện tương ứng bằng True => không lọc theo trường đó
+            # vd: nếu không có product_name, thì name_match = True, if True => sẽ được bỏ qua
             name_match = name in matched_names if product_name else True
             brand_match = brand_value in matched_brands if brand else True
             category_match = category_value in matched_categories if category else True
@@ -100,6 +102,7 @@ class ActionSearchProducts(Action):
                 dispatcher.utter_message(response=tag_response_map[tag], search_results=result_msg)
             else:
                 dispatcher.utter_message(response="utter_search_results", search_results=result_msg)
+                dispatcher.utter_message(response="utter")
 
             if len(filtered) > 5:
                 dispatcher.utter_message(text=f"Còn {len(filtered) - 5} sản phẩm khác. Bạn muốn lọc kỹ hơn không?")

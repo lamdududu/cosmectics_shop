@@ -124,6 +124,15 @@ slots:
     - type: from_entity
       entity: tag
 
+
+forms:
+  product_info_form:
+    required_slots:
+      - tag
+      - brand
+      - category
+
+
 responses:
   utter_greet:
     - text: "Xin chào! Tôi có thể giúp gì cho bạn hôm nay?"
@@ -151,7 +160,6 @@ responses:
     - text: "Da nhạy cảm cần tránh sản phẩm chứa hương liệu và cồn. Ưu tiên sản phẩm có thành phần làm dịu như chiết xuất cúc la mã, trà xanh hoặc centella asiatica.
             Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
   
-
   utter_skin_tag_combination:
     - text: "Da hỗn hợp cần chăm sóc linh hoạt, nên dùng các sản phẩm nhẹ dịu, kiểm soát dầu vùng chữ T và dưỡng ẩm vùng da khô.
             Tôi gợi ý cho bạn sản phẩm sau: {search_results}"
@@ -167,6 +175,21 @@ responses:
 
   utter_default:
     - text: "Xin lỗi, tôi không hiểu. Bạn có thể nói lại được không?"
+
+  utter_ask_tag:
+    - text: "Bạn đang quan tâm tới loại da nào hay tình trạng da gì?"
+
+  utter_ask_brand:
+    - text: "Bạn muốn tìm sản phẩm từ thương hiệu nào?"
+
+  utter_ask_category:
+    - text: "Bạn muốn tìm loại sản phẩm gì (ví dụ: sữa rửa mặt, kem dưỡng,...)?"
+
+  utter_submit_partial_form:
+    - text: "Cảm ơn bạn. Mình sẽ tìm sản phẩm {information} nhé."
+
+  utter_submit_full_form:
+    - text: "Cảm ơn bạn. Mình sẽ tìm sản phẩm {category} {tag} của thương hiệu {brand} nhé."
 
 
 actions:
